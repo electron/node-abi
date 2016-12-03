@@ -1,5 +1,7 @@
 # Node.js ABI
 
+[![Build Status](https://travis-ci.org/lgeiger/node-abi.svg?branch=v1.0.0)](https://travis-ci.org/lgeiger/node-abi)
+
 Get the Node ABI for a given target and runtime.
 
 ## Installation
