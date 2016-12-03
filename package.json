@@ -1,0 +1,29 @@
+{
+  "name": "node-abi",
+  "version": "0.0.0",
+  "description": "Get the Node ABI for a given target and runtime",
+  "main": "index.js",
+  "scripts": {
+    "test": "tape test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lgeiger/node-abi.git"
+  },
+  "keywords": [
+    "node",
+    "electron",
+    "node_module_version",
+    "abi",
+    "v8"
+  ],
+  "author": "Lukas Geiger",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lgeiger/node-abi/issues"
+  },
+  "homepage": "https://github.com/lgeiger/node-abi#readme",
+  "devDependencies": {
+    "tape": "^4.6.3"
+  }
+}
