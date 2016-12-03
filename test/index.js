@@ -39,3 +39,8 @@ test('getAbi calculates correct Electron ABI', function (t) {
   t.equal(getAbi('0.30.0', 'electron'), '44')
   t.end()
 })
+
+test('getAbi supports leading v', function (t) {
+  t.equal(getAbi('v7.2.0'), '51')
+  t.end()
+})
