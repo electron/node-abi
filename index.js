@@ -20,7 +20,22 @@ function getAbi (target, runtime) {
     if (/^5\./.test(target)) return '47'
     if (/^4\./.test(target)) return '46'
     if (/^0\.12\./.test(target)) return '14'
+    if (/^0\.10\.[0-3]$/.test(target)) return '0x000B'
     if (/^0\.10\./.test(target)) return '11'
+    // io.js and legacy Node.js
+    if (/^3\./.test(target)) return '45'
+    if (/^2\./.test(target)) return '44'
+    if (/^1\.[1-8]\./.test(target)) return '43'
+    if (/^1\.0\./.test(target)) return '42'
+    if (/^0\.11\.1[1-6]/.test(target)) return '14'
+    if (/^0\.11\.10/.test(target)) return '13'
+    if (/^0\.11\.[8-9]/.test(target)) return '13'
+    if (/^0\.11\.[0-7]/.test(target)) return '0x000C'
+    if (/^0\.9\.1[0-2]$/.test(target)) return '0x000B'
+    if (/^0\.9\.9$/.test(target)) return '0x000B'
+    if (/^0\.9\.[1-8]$/.test(target)) return '0x000A'
+    if (/^0\.9\.0/.test(target)) return '1'
+    if (/^0\.[2-8]/.test(target)) return '1'
   }
 
   throw new Error('Could not detect abi for version ' + target + ' and runtime ' + runtime)
