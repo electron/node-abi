@@ -1,5 +1,7 @@
 # Node.js ABI
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/lgeiger/node-abi.svg)](https://greenkeeper.io/)
+
 [![Build Status](https://travis-ci.org/lgeiger/node-abi.svg?branch=v1.0.0)](https://travis-ci.org/lgeiger/node-abi)
 
 Get the Node ABI for a given target and runtime.
