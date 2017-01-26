@@ -1,6 +1,6 @@
 {
   "name": "node-abi",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "Get the Node ABI for a given target and runtime",
   "main": "index.js",
   "scripts": {
