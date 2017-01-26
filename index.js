@@ -45,9 +45,9 @@ function getAbi (target, runtime) {
 var allTargets = [
   {runtime: 'node', target: '0.10.48', lts: false},
   {runtime: 'node', target: '0.12.17', lts: false},
-  {runtime: 'node', target: '4.6.1', lts: false},
+  {runtime: 'node', target: '4.6.1', lts: new Date() < new Date(2017, 04, 01)},
   {runtime: 'node', target: '5.12.0', lts: false},
-  {runtime: 'node', target: '6.9.4', lts: true},
+  {runtime: 'node', target: '6.9.4', lts: new Date() < new Date(2018, 04, 18)},
   {runtime: 'node', target: '7.4.0', lts: false},
   {runtime: 'electron', target: '1.0.2', lts: false},
   {runtime: 'electron', target: '1.2.8', lts: false},
