@@ -21,16 +21,16 @@ nodeAbi.getAbi('1.4.10', 'electron')
 
 nodeAbi.allTargets
 // [
-//   { runtime: 'node', target: '0.10.48' },
-//   { runtime: 'node', target: '0.12.17' },
-//   { runtime: 'node', target: '4.6.1' },
-//   { runtime: 'node', target: '5.12.0' },
-//   { runtime: 'node', target: '6.9.1' },
-//   { runtime: 'node', target: '7.0.0' },
-//   { runtime: 'electron', target: '1.0.2' },
-//   { runtime: 'electron', target: '1.2.8' },
-//   { runtime: 'electron', target: '1.3.12' },
-//   { runtime: 'electron', target: '1.4.10' }
+//  { runtime: 'node', target: '0.10.48', lts: false },
+//  { runtime: 'node', target: '0.12.17', lts: false },
+//  { runtime: 'node', target: '4.6.1', lts: false },
+//  { runtime: 'node', target: '5.12.0', lts: false },
+//  { runtime: 'node', target: '6.9.4', lts: true },
+//  { runtime: 'node', target: '7.4.0', lts: false },
+//  { runtime: 'electron', target: '1.0.2', lts: false },
+//  { runtime: 'electron', target: '1.2.8', lts: false },
+//  { runtime: 'electron', target: '1.3.13', lts: false },
+//  { runtime: 'electron', target: '1.4.15', lts: false }
 // ]
 ```
 
