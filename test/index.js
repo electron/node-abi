@@ -62,7 +62,6 @@ test('getAbi supports leading v', function (t) {
 })
 
 test('getAbi returns abi if passed as target', function (t) {
-  t.equal(getAbi(57), '57')
   t.equal(getAbi('57'), '57')
   t.end()
 })
