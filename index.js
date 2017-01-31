@@ -1,7 +1,5 @@
 function getAbi (target, runtime) {
-  if (typeof target === 'number' || target == Number(target)) {
-    return String(target)
-  }
+  if (target === String(Number(target))) return target
   if (target) target = target.replace(/^v/, '')
 
   if (runtime === 'electron') {
