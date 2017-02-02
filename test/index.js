@@ -15,6 +15,7 @@ test('getTarget calculates correct Node target', function (t) {
 })
 
 test('getTarget calculates correct Electron target', function (t) {
+  t.throws(getTarget.bind(null, '14', 'electron'))
   t.equal(getTarget('47', 'electron'), '1.0.2')
   t.equal(getTarget('48', 'electron'), '1.2.8')
   t.equal(getTarget('49', 'electron'), '1.3.13')
