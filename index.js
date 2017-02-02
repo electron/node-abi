@@ -55,7 +55,7 @@ function getTarget (abi, runtime) {
     .map(function (t) {
       return t.target
     })
-  if (match) return match[0]
+  if (match.length) return match[0]
 
   throw new Error('Could not detect target for abi ' + abi + ' and runtime ' + runtime)
 }
