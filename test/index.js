@@ -1,5 +1,26 @@
 var test = require('tape')
 var getAbi = require('../index').getAbi
+var getTarget = require('../index').getTarget
+
+test('getTarget calculates correct Node target', function (t) {
+  t.equal(getTarget(undefined), process.versions.node)
+  t.equal(getTarget(null), process.versions.node)
+  t.equal(getTarget('11'), '0.10.48')
+  t.equal(getTarget('14'), '0.12.17')
+  t.equal(getTarget('46'), '4.6.1')
+  t.equal(getTarget('47'), '5.12.0')
+  t.equal(getTarget('48'), '6.9.4')
+  t.equal(getTarget('51'), '7.4.0')
+  t.end()
+})
+
+test('getTarget calculates correct Electron target', function (t) {
+  t.equal(getTarget('47', 'electron'), '1.0.2')
+  t.equal(getTarget('48', 'electron'), '1.2.8')
+  t.equal(getTarget('49', 'electron'), '1.3.13')
+  t.equal(getTarget('50', 'electron'), '1.4.15')
+  t.end()
+})
 
 test('getAbi calculates correct Node ABI', function (t) {
   t.equal(getAbi(undefined), process.versions.modules)

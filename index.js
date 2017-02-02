@@ -42,18 +42,37 @@ function getAbi (target, runtime) {
   throw new Error('Could not detect abi for version ' + target + ' and runtime ' + runtime)
 }
 
+function getTarget (abi, runtime) {
+  if (abi && abi !== String(Number(abi))) return abi
+  if (!runtime) runtime = 'node'
+
+  if (runtime === 'node' && !abi) return process.versions.node
+
+  var match = allTargets
+    .filter(function (t) {
+      return t.abi === abi && t.runtime === runtime
+    })
+    .map(function (t) {
+      return t.target
+    })
+  if (match) return match[0]
+
+  throw new Error('Could not detect target for abi ' + abi + ' and runtime ' + runtime)
+}
+
 var allTargets = [
-  {runtime: 'node', target: '0.10.48', lts: false},
-  {runtime: 'node', target: '0.12.17', lts: false},
-  {runtime: 'node', target: '4.6.1', lts: new Date() < new Date(2017, 04, 01)},
-  {runtime: 'node', target: '5.12.0', lts: false},
-  {runtime: 'node', target: '6.9.4', lts: new Date() < new Date(2018, 04, 18)},
-  {runtime: 'node', target: '7.4.0', lts: false},
-  {runtime: 'electron', target: '1.0.2', lts: false},
-  {runtime: 'electron', target: '1.2.8', lts: false},
-  {runtime: 'electron', target: '1.3.13', lts: false},
-  {runtime: 'electron', target: '1.4.15', lts: false}
+  {runtime: 'node', target: '0.10.48', abi: '11', lts: false},
+  {runtime: 'node', target: '0.12.17', abi: '14', lts: false},
+  {runtime: 'node', target: '4.6.1', abi: '46', lts: new Date() < new Date(2017, 04, 01)},
+  {runtime: 'node', target: '5.12.0', abi: '47', lts: false},
+  {runtime: 'node', target: '6.9.4', abi: '48', lts: new Date() < new Date(2018, 04, 18)},
+  {runtime: 'node', target: '7.4.0', abi: '51', lts: false},
+  {runtime: 'electron', target: '1.0.2', abi: '47', lts: false},
+  {runtime: 'electron', target: '1.2.8', abi: '48', lts: false},
+  {runtime: 'electron', target: '1.3.13', abi: '49', lts: false},
+  {runtime: 'electron', target: '1.4.15', abi: '50', lts: false}
 ]
 
 exports.getAbi = getAbi
+exports.getTarget = getTarget
 exports.allTargets = allTargets
