@@ -42,6 +42,24 @@ function getAbi (target, runtime) {
   throw new Error('Could not detect abi for version ' + target + ' and runtime ' + runtime)
 }
 
+function getTarget (abi, runtime) {
+  if (abi && abi !== String(Number(abi))) return abi
+  if (!runtime) runtime = 'node'
+
+  if (runtime === 'node' && !abi) return process.versions.node
+
+  var match = allTargets
+    .filter(function (t) {
+      return t.abi === abi && t.runtime === runtime
+    })
+    .map(function (t) {
+      return t.target
+    })
+  if (match) return match[0]
+
+  throw new Error('Could not detect target for abi ' + abi + ' and runtime ' + runtime)
+}
+
 var allTargets = [
   {runtime: 'node', target: '0.10.48', abi: '11', lts: false},
   {runtime: 'node', target: '0.12.17', abi: '14', lts: false},
@@ -56,4 +74,5 @@ var allTargets = [
 ]
 
 exports.getAbi = getAbi
+exports.getTarget = getTarget
 exports.allTargets = allTargets

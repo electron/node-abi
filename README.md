@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/lgeiger/node-abi.svg?branch=v1.0.0)](https://travis-ci.org/lgeiger/node-abi) [![Greenkeeper badge](https://badges.greenkeeper.io/lgeiger/node-abi.svg)](https://greenkeeper.io/)
 
 
-Get the Node ABI for a given target and runtime.
+Get the Node ABI for a given target and runtime, and vice versa.
 
 ## Installation
 ```
@@ -18,6 +18,10 @@ nodeAbi.getAbi('7.2.0', 'node')
 // '51'
 nodeAbi.getAbi('1.4.10', 'electron')
 // '50'
+nodeAbi.getTarget('51', 'node')
+// '7.2.0'
+nodeAbi.getTarget('50', 'electron')
+// '1.4.15'
 
 nodeAbi.allTargets
 // [
