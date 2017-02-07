@@ -36,6 +36,9 @@ nodeAbi.allTargets
 //  { runtime: 'electron', target: '1.3.13', abi: '49', lts: false },
 //  { runtime: 'electron', target: '1.4.15', abi: '50', lts: false }
 // ]
+nodeAbi.supportedTargets
+nodeAbi.deprecatedTargets
+// ...
 ```
 
 ## References
