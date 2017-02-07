@@ -62,16 +62,31 @@ function getTarget (abi, runtime) {
 }
 
 var allTargets = [
+  {runtime: 'node', target: '0.2.0', abi: '1', lts: false},
+  {runtime: 'node', target: '0.9.1', abi: '0x000A', lts: false},
+  {runtime: 'node', target: '0.10.0', abi: '0x000B', lts: false},
   {runtime: 'node', target: '0.10.48', abi: '11', lts: false},
+  {runtime: 'node', target: '0.11.0', abi: '0x000C', lts: false},
+  {runtime: 'node', target: '0.11.10', abi: '13', lts: false},
   {runtime: 'node', target: '0.12.17', abi: '14', lts: false},
+  {runtime: 'node', target: '1.0.0', abi: '42', lts: false},
+  {runtime: 'node', target: '1.1.0', abi: '43', lts: false},
+  {runtime: 'node', target: '2.0.0', abi: '44', lts: false},
+  {runtime: 'node', target: '3.0.0', abi: '45', lts: false},
   {runtime: 'node', target: '4.6.1', abi: '46', lts: new Date() < new Date(2017, 04, 01)},
   {runtime: 'node', target: '5.12.0', abi: '47', lts: false},
   {runtime: 'node', target: '6.9.4', abi: '48', lts: new Date() < new Date(2018, 04, 18)},
   {runtime: 'node', target: '7.4.0', abi: '51', lts: false},
+  {runtime: 'node', target: '8.0.0', abi: '52', lts: false},
+  {runtime: 'electron', target: '0.30.0', abi: '44', lts: false},
+  {runtime: 'electron', target: '0.31.0', abi: '45', lts: false},
+  {runtime: 'electron', target: '0.33.0', abi: '46', lts: false},
   {runtime: 'electron', target: '1.0.2', abi: '47', lts: false},
   {runtime: 'electron', target: '1.2.8', abi: '48', lts: false},
   {runtime: 'electron', target: '1.3.13', abi: '49', lts: false},
-  {runtime: 'electron', target: '1.4.15', abi: '50', lts: false}
+  {runtime: 'electron', target: '1.4.15', abi: '50', lts: false},
+  {runtime: 'electron', target: '1.5.0', abi: '51', lts: false},
+  {runtime: 'electron', target: '1.6.0', abi: '53', lts: false}
 ]
 
 exports.getAbi = getAbi
