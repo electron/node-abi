@@ -61,7 +61,6 @@ test('getAbi calculates correct Node ABI', function (t) {
 
 test('getAbi calculates correct Electron ABI', function (t) {
   t.throws(function () { getAbi(undefined, 'electron') })
-  t.throws(function () { getAbi('7.2.0', 'electron') })
   t.equal(getAbi('1.4.0', 'electron'), '50')
   t.equal(getAbi('1.3.0', 'electron'), '49')
   t.equal(getAbi('1.2.0', 'electron'), '48')
