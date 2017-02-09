@@ -71,7 +71,8 @@ var allTargets = [
   {runtime: 'electron', target: '1.0.2', abi: '47', lts: false},
   {runtime: 'electron', target: '1.2.8', abi: '48', lts: false},
   {runtime: 'electron', target: '1.3.13', abi: '49', lts: false},
-  {runtime: 'electron', target: '1.4.15', abi: '50', lts: false}
+  {runtime: 'electron', target: '1.4.15', abi: '50', lts: false},
+  {runtime: 'electron', target: '1.6.0', abi: '53', lts: false}
 ]
 
 exports.getAbi = getAbi
