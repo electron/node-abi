@@ -64,9 +64,9 @@ function getTarget (abi, runtime) {
 var supportedTargets = [
   {runtime: 'node', target: '0.10.48', abi: '11', lts: false},
   {runtime: 'node', target: '0.12.17', abi: '14', lts: false},
-  {runtime: 'node', target: '4.6.1', abi: '46', lts: new Date() < new Date(2017, 04, 01)},
+  {runtime: 'node', target: '4.6.1', abi: '46', lts: new Date() < new Date(2017, 4, 1)},
   {runtime: 'node', target: '5.12.0', abi: '47', lts: false},
-  {runtime: 'node', target: '6.9.4', abi: '48', lts: new Date() < new Date(2018, 04, 18)},
+  {runtime: 'node', target: '6.9.4', abi: '48', lts: new Date() < new Date(2018, 4, 18)},
   {runtime: 'node', target: '7.4.0', abi: '51', lts: false},
   {runtime: 'electron', target: '1.0.2', abi: '47', lts: false},
   {runtime: 'electron', target: '1.2.8', abi: '48', lts: false},
