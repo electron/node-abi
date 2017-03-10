@@ -14,31 +14,35 @@ npm install node-abi
 ```javascript
 const nodeAbi = require('node-abi')
 
-nodeAbi.getAbi('7.2.0', 'node')
+nodeAbi.getAbi('node', '7.2.0')
 // '51'
-nodeAbi.getAbi('1.4.10', 'electron')
+nodeAbi.getAbi('electron', '1.4.10')
 // '50'
-nodeAbi.getTarget('51', 'node')
-// '7.2.0'
-nodeAbi.getTarget('50', 'electron')
-// '1.4.15'
+nodeAbi.getTargets('node', '47')
+// [ '5.0.0',
+//   '5.1.0',
+//   ...
+//   '5.11.1',
+//   '5.12.0' ]
+nodeAbi.getTargets('electron', '49')
+// [ '1.3.0',
+//   '1.3.1',
+//   ...
+//   '1.3.12',
+//   '1.3.13' ]
 
 nodeAbi.allTargets
-// [
-//  { runtime: 'node', target: '0.10.48', abi: '11', lts: false },
-//  { runtime: 'node', target: '0.12.17', abi: '14', lts: false },
-//  { runtime: 'node', target: '4.6.1', abi: '46', lts: true },
-//  { runtime: 'node', target: '5.12.0', abi: '47', lts: false },
-//  { runtime: 'node', target: '6.9.4', abi: '48', lts: true },
-//  { runtime: 'node', target: '7.4.0', abi: '51', lts: false },
-//  { runtime: 'electron', target: '1.0.2', abi: '47', lts: false },
-//  { runtime: 'electron', target: '1.2.8', abi: '48', lts: false },
-//  { runtime: 'electron', target: '1.3.13', abi: '49', lts: false },
-//  { runtime: 'electron', target: '1.4.15', abi: '50', lts: false }
-// ]
+// [ { runtime: 'node', target: '0.2.0', abi: '1' },
+//   { runtime: 'node', target: '0.2.1', abi: '1' },
+//   ...
+//   { runtime: 'node', target: '7.7.1', abi: '51' },
+//   { runtime: 'node', target: '7.7.2', abi: '51' },
+//   { runtime: 'electron', target: '0.24.0', abi: '43' },
+//   ...
+//   { runtime: 'electron', target: '1.6.2', abi: '53' },
+//   { runtime: 'electron', target: '1.6.3', abi: '53' } ]
 nodeAbi.deprecatedTargets
 nodeAbi.supportedTargets
-nodeAbi.futureTargets
 // ...
 ```
 

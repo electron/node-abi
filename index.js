@@ -1,105 +1,58 @@
-function getAbi (target, runtime) {
-  if (target === String(Number(target))) return target
-  if (target) target = target.replace(/^v/, '')
+var semver = require('semver')
 
-  if (runtime === 'electron') {
-    if (/^1\.6\./.test(target)) return '53'
-    if (/^1\.5\./.test(target)) return '51'
-    if (/^1\.4\./.test(target)) return '50'
-    if (/^1\.3\./.test(target)) return '49'
-    if (/^1\.[1-2]\./.test(target)) return '48'
-    if (/^1\.0\./.test(target)) return '47'
-    if (/^0\.3[6-7]\./.test(target)) return '47'
-    if (/^0\.3[3-5]\./.test(target)) return '46'
-    if (/^0\.3[1-2]\./.test(target)) return '45'
-    if (/^0\.30\./.test(target)) return '44'
-  } else {
-    if (!target) return process.versions.modules
-    if (target === process.versions.node) return process.versions.modules
-    if (/^8\./.test(target)) return '52'
-    if (/^7\./.test(target)) return '51'
-    if (/^6\./.test(target)) return '48'
-    if (/^5\./.test(target)) return '47'
-    if (/^4\./.test(target)) return '46'
-    if (/^0\.12\./.test(target)) return '14'
-    if (/^0\.10\.[0-3]$/.test(target)) return '0x000B'
-    if (/^0\.10\./.test(target)) return '11'
-    // io.js and legacy Node.js
-    if (/^3\./.test(target)) return '45'
-    if (/^2\./.test(target)) return '44'
-    if (/^1\.[1-8]\./.test(target)) return '43'
-    if (/^1\.0\./.test(target)) return '42'
-    if (/^0\.11\.1[1-6]/.test(target)) return '14'
-    if (/^0\.11\.10/.test(target)) return '13'
-    if (/^0\.11\.[8-9]/.test(target)) return '13'
-    if (/^0\.11\.[0-7]/.test(target)) return '0x000C'
-    if (/^0\.9\.1[0-2]$/.test(target)) return '0x000B'
-    if (/^0\.9\.9$/.test(target)) return '0x000B'
-    if (/^0\.9\.[1-8]$/.test(target)) return '0x000A'
-    if (/^0\.9\.0/.test(target)) return '1'
-    if (/^0\.[2-8]/.test(target)) return '1'
-  }
+function getAbi (runtime, target) {
+  var match = allTargets.filter(function (item) {
+    return item.runtime === runtime && semver.eq(item.target, target)
+  })
 
-  throw new Error('Could not detect abi for version ' + target + ' and runtime ' + runtime + '.  Updating "node-abi" might help solve this issue if it is a new release of ' + runtime)
+  if (match.length) return match[0].abi
+  throw new Error('Could not detect abi for runtime ' + runtime + ' and version ' + target + ' (updating "node-abi" might help solve this issue if it is a new release of ' + runtime + ')')
 }
 
-function getTarget (abi, runtime) {
-  if (abi && abi !== String(Number(abi))) return abi
-  if (!runtime) runtime = 'node'
-
-  if (runtime === 'node' && !abi) return process.versions.node
-
+function getTargets (runtime, abi) {
   var match = allTargets
-    .filter(function (t) {
-      return t.abi === abi && t.runtime === runtime
+    .filter(function (item) {
+      return item.runtime === runtime && item.abi === abi
     })
-    .map(function (t) {
-      return t.target
+    .map(function (item) {
+      return item.target
     })
-  if (match.length) return match[0]
 
-  throw new Error('Could not detect target for abi ' + abi + ' and runtime ' + runtime)
+  if (match.length) return match
+  throw new Error('Could not detect target for runtime ' + runtime + ' and abi ' + abi)
 }
 
-var supportedTargets = [
-  {runtime: 'node', target: '0.10.48', abi: '11', lts: false},
-  {runtime: 'node', target: '0.12.17', abi: '14', lts: false},
-  {runtime: 'node', target: '4.6.1', abi: '46', lts: new Date() < new Date(2017, 4, 1)},
-  {runtime: 'node', target: '5.12.0', abi: '47', lts: false},
-  {runtime: 'node', target: '6.9.4', abi: '48', lts: new Date() < new Date(2018, 4, 18)},
-  {runtime: 'node', target: '7.4.0', abi: '51', lts: false},
-  {runtime: 'electron', target: '1.0.2', abi: '47', lts: false},
-  {runtime: 'electron', target: '1.2.8', abi: '48', lts: false},
-  {runtime: 'electron', target: '1.3.13', abi: '49', lts: false},
-  {runtime: 'electron', target: '1.4.15', abi: '50', lts: false},
-  {runtime: 'electron', target: '1.5.0', abi: '51', lts: false},
-  {runtime: 'electron', target: '1.6.0', abi: '53', lts: false}
+var allTargets = [].concat(
+  require('./node.json').map(function (item) {
+    return {runtime: 'node', target: item.target, abi: item.abi}
+  }),
+  require('./electron.json').map(function (item) {
+    return {runtime: 'electron', target: item.target, abi: item.abi}
+  })
+)
+
+var supportedRanges = [
+  {runtime: 'electron', target: '1'},
+  {runtime: 'node', target: '4', start: new Date(2015, 8, 1), stop: new Date(2018, 4, 1)},
+  {runtime: 'node', target: '5', start: new Date(2015, 10, 1), stop: new Date(2016, 6, 1)},
+  {runtime: 'node', target: '6', start: new Date(2016, 4, 1), stop: new Date(2019, 4, 1)},
+  {runtime: 'node', target: '7', start: new Date(2016, 10, 1), stop: new Date(2017, 6, 1)},
+  {runtime: 'node', target: '8', start: new Date(2017, 4, 1), stop: new Date(2020, 4, 1)}
 ]
 
-var deprecatedTargets = [
-  {runtime: 'node', target: '0.2.0', abi: '1', lts: false},
-  {runtime: 'node', target: '0.9.1', abi: '0x000A', lts: false},
-  {runtime: 'node', target: '0.10.0', abi: '0x000B', lts: false},
-  {runtime: 'node', target: '0.11.0', abi: '0x000C', lts: false},
-  {runtime: 'node', target: '0.11.10', abi: '13', lts: false},
-  {runtime: 'node', target: '1.0.0', abi: '42', lts: false},
-  {runtime: 'node', target: '1.1.0', abi: '43', lts: false},
-  {runtime: 'node', target: '2.0.0', abi: '44', lts: false},
-  {runtime: 'node', target: '3.0.0', abi: '45', lts: false},
-  {runtime: 'electron', target: '0.30.0', abi: '44', lts: false},
-  {runtime: 'electron', target: '0.31.0', abi: '45', lts: false},
-  {runtime: 'electron', target: '0.33.0', abi: '46', lts: false}
-]
+function isSupported (target) {
+  return supportedRanges.some(function (range) {
+    if (target.runtime !== range.runtime) return false
+    if (!semver.satisfies(target.target, range.target)) return false
+    if (range.start && range.start > Date.now()) return false
+    if (range.stop && range.stop < Date.now()) return false
+    return true
+  })
+}
 
-var futureTargets = [
-  {runtime: 'node', target: '8.0.0', abi: '52', lts: false}
-]
-
-var allTargets = deprecatedTargets.concat(supportedTargets).concat(futureTargets)
-
+exports.isSupported = isSupported
 exports.getAbi = getAbi
-exports.getTarget = getTarget
-exports.deprecatedTargets = deprecatedTargets
-exports.supportedTargets = supportedTargets
-exports.futureTargets = futureTargets
+exports.getTargets = getTargets
+exports.deprecatedTargets = allTargets.filter(function (target) { return !isSupported(target) })
+exports.supportedTargets = allTargets.filter(function (target) { return isSupported(target) })
 exports.allTargets = allTargets
