@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/lgeiger/node-abi#readme",
   "devDependencies": {
-    "standard": "^8.6.0",
+    "standard": "^9.0.2",
     "tape": "^4.6.3"
   }
 }
