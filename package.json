@@ -2,16 +2,6 @@
   "name": "node-abi",
   "version": "2.0.0",
   "description": "Get the Node ABI for a given target and runtime, and vice versa.",
-  "main": "index.js",
-  "scripts": {
-    "lint": "standard",
-    "test": "npm run lint && npm run unit",
-    "unit": "tape test/index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/lgeiger/node-abi.git"
-  },
   "keywords": [
     "node",
     "electron",
@@ -19,14 +9,40 @@
     "abi",
     "v8"
   ],
-  "author": "Lukas Geiger",
-  "license": "MIT",
+  "homepage": "https://github.com/lgeiger/node-abi#readme",
   "bugs": {
     "url": "https://github.com/lgeiger/node-abi/issues"
   },
-  "homepage": "https://github.com/lgeiger/node-abi#readme",
+  "license": "MIT",
+  "author": "Lukas Geiger",
+  "contributors": [
+    "Kirill Fomichev <fanatid@ya.ru> (https://github.com/fanatid)"
+  ],
+  "files": [
+    "electron.json",
+    "index.js",
+    "node.json"
+  ],
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lgeiger/node-abi.git"
+  },
+  "scripts": {
+    "lint": "standard",
+    "test": "npm run lint && npm run unit",
+    "unit": "tape test/index.js",
+    "update": "node util/update-node.js && node util/update-electron.js"
+  },
+  "dependencies": {
+    "semver": "^5.3.0"
+  },
   "devDependencies": {
+    "chalk": "^1.1.3",
+    "cheerio": "^0.22.0",
+    "node-fetch": "^1.6.3",
     "standard": "^9.0.2",
-    "tape": "^4.6.3"
+    "tape": "^4.6.3",
+    "tmp": "0.0.31"
   }
 }
