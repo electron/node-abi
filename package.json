@@ -3,6 +3,11 @@
   "version": "2.0.0",
   "description": "Get the Node ABI for a given target and runtime, and vice versa.",
   "main": "index.js",
+  "files": [
+    "electron.json",
+    "index.js",
+    "node.json"
+  ],
   "scripts": {
     "lint": "standard",
     "test": "npm run lint && npm run unit",
