@@ -19,16 +19,24 @@ function getAbi (target, runtime) {
 }
 
 function getTarget (abi, runtime) {
+  return getTargets(abi, runtime)[0]
+}
+
+function getTargets (abi, runtime) {
   if (abi && abi !== String(Number(abi))) return abi
   if (!runtime) runtime = 'node'
 
-  if (runtime === 'node' && !abi) return process.versions.node
+  if (runtime === 'node' && !abi) return [process.versions.node]
 
-  for (var i = 0; i < allTargets.length; ++i) {
-    var item = allTargets[i]
-    if (item.runtime === runtime && item.abi === abi) return item.target
-  }
+  var match = allTargets
+  .filter(function (item) {
+    return item.runtime === runtime && item.abi === abi
+  })
+  .map(function (item) {
+    return item.target
+  })
 
+  if (match.length) return match
   throw new Error('Could not detect target for runtime ' + runtime + ' and abi ' + abi)
 }
 
@@ -65,6 +73,7 @@ function isSupported (target) {
 
 exports.getAbi = getAbi
 exports.getTarget = getTarget
+exports.getTargets = getTargets
 exports.deprecatedTargets = allTargets.filter(function (target) { return !isSupported(target) })
 exports.supportedTargets = allTargets.filter(function (target) { return isSupported(target) })
 exports.futureTargets = []
