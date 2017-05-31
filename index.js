@@ -17,7 +17,7 @@ function getAbi (target, runtime) {
   } else {
     if (!target) return process.versions.modules
     if (target === process.versions.node) return process.versions.modules
-    if (/^8\./.test(target)) return '52'
+    if (/^8\./.test(target)) return '57'
     if (/^7\./.test(target)) return '51'
     if (/^6\./.test(target)) return '48'
     if (/^5\./.test(target)) return '47'
@@ -69,6 +69,7 @@ var supportedTargets = [
   {runtime: 'node', target: '5.12.0', abi: '47', lts: false},
   {runtime: 'node', target: '6.9.4', abi: '48', lts: new Date() < new Date(2018, 4, 18)},
   {runtime: 'node', target: '7.4.0', abi: '51', lts: false},
+  {runtime: 'node', target: '8.0.0', abi: '57', lts: false},
   {runtime: 'electron', target: '1.0.2', abi: '47', lts: false},
   {runtime: 'electron', target: '1.2.8', abi: '48', lts: false},
   {runtime: 'electron', target: '1.3.13', abi: '49', lts: false},
@@ -93,9 +94,7 @@ var deprecatedTargets = [
   {runtime: 'electron', target: '0.33.0', abi: '46', lts: false}
 ]
 
-var futureTargets = [
-  {runtime: 'node', target: '8.0.0', abi: '52', lts: false}
-]
+var futureTargets = []
 
 var allTargets = deprecatedTargets.concat(supportedTargets).concat(futureTargets)
 
