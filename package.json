@@ -1,6 +1,6 @@
 {
   "name": "node-abi",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Get the Node ABI for a given target and runtime, and vice versa.",
   "main": "index.js",
   "scripts": {
