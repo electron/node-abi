@@ -63,8 +63,6 @@ function getTarget (abi, runtime) {
 }
 
 var supportedTargets = [
-  {runtime: 'node', target: '0.10.48', abi: '11', lts: false},
-  {runtime: 'node', target: '0.12.17', abi: '14', lts: false},
   {runtime: 'node', target: '4.6.1', abi: '46', lts: new Date() < new Date(2017, 4, 1)},
   {runtime: 'node', target: '5.12.0', abi: '47', lts: false},
   {runtime: 'node', target: '6.9.4', abi: '48', lts: new Date() < new Date(2018, 4, 18)},
@@ -83,8 +81,10 @@ var deprecatedTargets = [
   {runtime: 'node', target: '0.2.0', abi: '1', lts: false},
   {runtime: 'node', target: '0.9.1', abi: '0x000A', lts: false},
   {runtime: 'node', target: '0.10.0', abi: '0x000B', lts: false},
+  {runtime: 'node', target: '0.10.48', abi: '11', lts: false},
   {runtime: 'node', target: '0.11.0', abi: '0x000C', lts: false},
   {runtime: 'node', target: '0.11.10', abi: '13', lts: false},
+  {runtime: 'node', target: '0.12.17', abi: '14', lts: false},
   {runtime: 'node', target: '1.0.0', abi: '42', lts: false},
   {runtime: 'node', target: '1.1.0', abi: '43', lts: false},
   {runtime: 'node', target: '2.0.0', abi: '44', lts: false},
