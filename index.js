@@ -3,6 +3,7 @@ function getAbi (target, runtime) {
   if (target) target = target.replace(/^v/, '')
 
   if (runtime === 'electron') {
+    if (/^1\.8\./.test(target)) return '57'
     if (/^1\.7\./.test(target)) return '54'
     if (/^1\.6\./.test(target)) return '53'
     if (/^1\.5\./.test(target)) return '51'
