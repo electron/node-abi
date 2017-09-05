@@ -1,6 +1,19 @@
 var test = require('tape')
 var getAbi = require('../index').getAbi
 var getTarget = require('../index').getTarget
+var getNextTarget = require('../index')._getNextTarget
+
+test('getNextTarget gets the next unsopported target', function (t) {
+  var mockTargets = [
+    {runtime: 'node', target: '7.0.0', abi: '51', lts: false},
+    {runtime: 'node', target: '8.0.0', abi: '57', lts: false},
+    {runtime: 'electron', target: '0.36.0', abi: '47', lts: false},
+    {runtime: 'electron', target: '1.1.0', abi: '48', lts: false}
+  ]
+  t.equal(getNextTarget('node', mockTargets), '9.0.0')
+  t.equal(getNextTarget('electron', mockTargets), '1.2.0')
+  t.end()
+})
 
 test('getTarget calculates correct Node target', function (t) {
   t.equal(getTarget(undefined), process.versions.node)
@@ -27,6 +40,7 @@ test('getAbi calculates correct Node ABI', function (t) {
   t.equal(getAbi(undefined), process.versions.modules)
   t.equal(getAbi(null), process.versions.modules)
   t.throws(function () { getAbi('a.b.c') })
+  t.throws(function () { getAbi(getNextTarget('node')) })
   t.equal(getAbi('7.2.0'), '51')
   t.equal(getAbi('7.0.0'), '51')
   t.equal(getAbi('6.9.9'), '48')
@@ -61,7 +75,7 @@ test('getAbi calculates correct Node ABI', function (t) {
 
 test('getAbi calculates correct Electron ABI', function (t) {
   t.throws(function () { getAbi(undefined, 'electron') })
-  t.throws(function () { getAbi('7.2.0', 'electron') })
+  t.throws(function () { getAbi(getNextTarget('electron'), 'electron') })
   t.equal(getAbi('1.4.0', 'electron'), '50')
   t.equal(getAbi('1.3.0', 'electron'), '49')
   t.equal(getAbi('1.2.0', 'electron'), '48')
