@@ -1,7 +1,8 @@
 var semver = require('semver')
 
-function getNextTarget (runtime) {
-  var latest = allTargets.filter(function (t) { return t.runtime === runtime }).slice(-1)[0]
+function getNextTarget (runtime, targets) {
+  if (targets == null) targets = allTargets
+  var latest = targets.filter(function (t) { return t.runtime === runtime }).slice(-1)[0]
   var increment = runtime === 'electron' ? 'minor' : 'major'
   return semver.inc(latest.target, increment)
 }
@@ -90,3 +91,4 @@ exports.deprecatedTargets = deprecatedTargets
 exports.supportedTargets = supportedTargets
 exports.futureTargets = futureTargets
 exports.allTargets = allTargets
+exports._getNextTarget = getNextTarget
