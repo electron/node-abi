@@ -1,5 +1,11 @@
 var semver = require('semver')
 
+function getNextTarget (runtime) {
+  var latest = allTargets.filter(function (t) { return t.runtime === runtime }).slice(-1)[0]
+  var increment = runtime === 'electron' ? 'minor' : 'major'
+  return semver.inc(latest.target, increment)
+}
+
 function getAbi (target, runtime) {
   if (target === String(Number(target))) return target
   if (target) target = target.replace(/^v/, '')
@@ -19,7 +25,7 @@ function getAbi (target, runtime) {
     else break
   }
 
-  if (abi) return abi
+  if (abi && semver.lt(target, getNextTarget(runtime))) return abi
   throw new Error('Could not detect abi for version ' + target + ' and runtime ' + runtime + '.  Updating "node-abi" might help solve this issue if it is a new release of ' + runtime)
 }
 
