@@ -1,7 +1,9 @@
 var test = require('tape')
+var semver = require('semver')
 var getAbi = require('../index').getAbi
 var getTarget = require('../index').getTarget
 var getNextTarget = require('../index')._getNextTarget
+var allTargets = require('../index').allTargets
 
 test('getNextTarget gets the next unsopported target', function (t) {
   var mockTargets = [
@@ -99,5 +101,17 @@ test('getAbi supports leading v', function (t) {
 
 test('getAbi returns abi if passed as target', function (t) {
   t.equal(getAbi('57'), '57')
+  t.end()
+})
+
+test('allTargets are sorted', function (t) {
+  var electron = allTargets.filter(function (t) { return t.runtime === 'electron' })
+  var node = allTargets.filter(function (t) { return t.runtime === 'node' })
+  function sort (t1, t2) {
+    return semver.compare(t1.target, t2.target)
+  }
+
+  t.deepEqual(electron, electron.slice().sort(sort))
+  t.deepEqual(node, node.slice().sort(sort))
   t.end()
 })
