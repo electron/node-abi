@@ -1,16 +1,17 @@
 {
   "name": "node-abi",
-  "version": "2.1.1",
+  "version": "0.0.0-development",
   "description": "Get the Node ABI for a given target and runtime, and vice versa.",
   "main": "index.js",
   "scripts": {
     "lint": "standard",
     "test": "npm run lint && npm run unit",
-    "unit": "tape test/index.js"
+    "unit": "tape test/index.js",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lgeiger/node-abi.git"
+    "url": "https://github.com/lgeiger/node-abi.git"
   },
   "keywords": [
     "node",
@@ -27,7 +28,8 @@
   "homepage": "https://github.com/lgeiger/node-abi#readme",
   "devDependencies": {
     "standard": "^10.0.0",
-    "tape": "^4.6.3"
+    "tape": "^4.6.3",
+    "semantic-release": "^7.0.2"
   },
   "dependencies": {
     "semver": "^5.4.1"
