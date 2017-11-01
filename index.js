@@ -49,11 +49,12 @@ function getTarget (abi, runtime) {
 }
 
 var supportedTargets = [
-  {runtime: 'node', target: '4.0.0', abi: '46', lts: new Date() < new Date(2017, 4, 1)},
+  {runtime: 'node', target: '4.0.0', abi: '46', lts: false},
   {runtime: 'node', target: '5.0.0', abi: '47', lts: false},
   {runtime: 'node', target: '6.0.0', abi: '48', lts: new Date() < new Date(2018, 4, 18)},
   {runtime: 'node', target: '7.0.0', abi: '51', lts: false},
   {runtime: 'node', target: '8.0.0', abi: '57', lts: false},
+  {runtime: 'node', target: '9.0.0', abi: '59', lts: new Date() < new Date(2019, 12, 31)},
   {runtime: 'electron', target: '0.36.0', abi: '47', lts: false},
   {runtime: 'electron', target: '1.1.0', abi: '48', lts: false},
   {runtime: 'electron', target: '1.3.0', abi: '49', lts: false},
