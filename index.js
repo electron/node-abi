@@ -62,7 +62,12 @@ var supportedTargets = [
   {runtime: 'electron', target: '1.5.0', abi: '51', lts: false},
   {runtime: 'electron', target: '1.6.0', abi: '53', lts: false},
   {runtime: 'electron', target: '1.7.0', abi: '54', lts: false},
-  {runtime: 'electron', target: '1.8.0', abi: '57', lts: false}
+  {runtime: 'electron', target: '1.8.0', abi: '57', lts: false},
+  {runtime: 'node-webkit', target: '0.13.0', abi: '47', lts: false},
+  {runtime: 'node-webkit', target: '0.15.0', abi: '48', lts: false},
+  {runtime: 'node-webkit', target: '0.18.3', abi: '51', lts: false},
+  {runtime: 'node-webkit', target: '0.23.0', abi: '57', lts: false},
+  {runtime: 'node-webkit', target: '0.26.5', abi: '59', lts: false}
 ]
 
 var deprecatedTargets = [
