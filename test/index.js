@@ -139,11 +139,13 @@ test('getAbi returns abi if passed as target', function (t) {
 test('allTargets are sorted', function (t) {
   var electron = allTargets.filter(function (t) { return t.runtime === 'electron' })
   var node = allTargets.filter(function (t) { return t.runtime === 'node' })
+  var nodeWebkit = allTargets.filter(function (t) { return t.runtime === 'node-webkit' })
   function sort (t1, t2) {
     return semver.compare(t1.target, t2.target)
   }
 
   t.deepEqual(electron, electron.slice().sort(sort))
   t.deepEqual(node, node.slice().sort(sort))
+  t.deepEqual(nodeWebkit, nodeWebkit.slice().sort(sort))
   t.end()
 })
