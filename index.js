@@ -65,6 +65,14 @@ var supportedTargets = [
   {runtime: 'electron', target: '1.8.0', abi: '57', lts: false}
 ]
 
+var additionalTargets = [
+  {runtime: 'node-webkit', target: '0.13.0', abi: '47', lts: false},
+  {runtime: 'node-webkit', target: '0.15.0', abi: '48', lts: false},
+  {runtime: 'node-webkit', target: '0.18.3', abi: '51', lts: false},
+  {runtime: 'node-webkit', target: '0.23.0', abi: '57', lts: false},
+  {runtime: 'node-webkit', target: '0.26.5', abi: '59', lts: false}
+]
+
 var deprecatedTargets = [
   {runtime: 'node', target: '0.2.0', abi: '1', lts: false},
   {runtime: 'node', target: '0.9.1', abi: '0x000A', lts: false},
@@ -84,12 +92,16 @@ var deprecatedTargets = [
 
 var futureTargets = []
 
-var allTargets = deprecatedTargets.concat(supportedTargets).concat(futureTargets)
+var allTargets = deprecatedTargets
+      .concat(supportedTargets)
+      .concat(additionalTargets)
+      .concat(futureTargets)
 
 exports.getAbi = getAbi
 exports.getTarget = getTarget
 exports.deprecatedTargets = deprecatedTargets
 exports.supportedTargets = supportedTargets
+exports.additionalTargets = additionalTargets
 exports.futureTargets = futureTargets
 exports.allTargets = allTargets
 exports._getNextTarget = getNextTarget

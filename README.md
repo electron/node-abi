@@ -38,6 +38,7 @@ nodeAbi.allTargets
 // ]
 nodeAbi.deprecatedTargets
 nodeAbi.supportedTargets
+nodeAbi.additionalTargets
 nodeAbi.futureTargets
 // ...
 ```

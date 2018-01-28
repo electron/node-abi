@@ -38,6 +38,16 @@ test('getTarget calculates correct Electron target', function (t) {
   t.end()
 })
 
+test('getTarget calculates correct Node-Webkit target', function (t) {
+  t.throws(getTarget.bind(null, '14', 'ode-webkit'))
+  t.equal(getTarget('47', 'node-webkit'), '0.13.0')
+  t.equal(getTarget('48', 'node-webkit'), '0.15.0')
+  t.equal(getTarget('51', 'node-webkit'), '0.18.3')
+  t.equal(getTarget('57', 'node-webkit'), '0.23.0')
+  t.equal(getTarget('59', 'node-webkit'), '0.26.5')
+  t.end()
+})
+
 test('getAbi calculates correct Node ABI', function (t) {
   t.equal(getAbi(undefined), process.versions.modules)
   t.equal(getAbi(null), process.versions.modules)
@@ -94,6 +104,28 @@ test('getAbi calculates correct Electron ABI', function (t) {
   t.end()
 })
 
+test('getAbi calculates correct Node-Webkit ABI', function (t) {
+  t.throws(function () { getAbi(undefined, 'node-webkit') })
+  t.throws(function () { getAbi(getNextTarget('node-webkit'), 'node-webkit') })
+  t.equal(getAbi('0.13.0', 'node-webkit'), '47')
+  t.equal(getAbi('0.14.0', 'node-webkit'), '47')
+  t.equal(getAbi('0.15.0', 'node-webkit'), '48')
+  t.equal(getAbi('0.16.0', 'node-webkit'), '48')
+  t.equal(getAbi('0.17.0', 'node-webkit'), '48')
+  t.equal(getAbi('0.18.2', 'node-webkit'), '48')
+  t.equal(getAbi('0.18.3', 'node-webkit'), '51')
+  t.equal(getAbi('0.19.0', 'node-webkit'), '51')
+  t.equal(getAbi('0.20.0', 'node-webkit'), '51')
+  t.equal(getAbi('0.21.0', 'node-webkit'), '51')
+  t.equal(getAbi('0.22.0', 'node-webkit'), '51')
+  t.equal(getAbi('0.23.0', 'node-webkit'), '57')
+  t.equal(getAbi('0.24.0', 'node-webkit'), '57')
+  t.equal(getAbi('0.25.0', 'node-webkit'), '57')
+  t.equal(getAbi('0.26.4', 'node-webkit'), '57')
+  t.equal(getAbi('0.26.5', 'node-webkit'), '59')
+  t.end()
+})
+
 test('getAbi supports leading v', function (t) {
   t.equal(getAbi('v7.2.0'), '51')
   t.end()
@@ -107,11 +139,13 @@ test('getAbi returns abi if passed as target', function (t) {
 test('allTargets are sorted', function (t) {
   var electron = allTargets.filter(function (t) { return t.runtime === 'electron' })
   var node = allTargets.filter(function (t) { return t.runtime === 'node' })
+  var nodeWebkit = allTargets.filter(function (t) { return t.runtime === 'node-webkit' })
   function sort (t1, t2) {
     return semver.compare(t1.target, t2.target)
   }
 
   t.deepEqual(electron, electron.slice().sort(sort))
   t.deepEqual(node, node.slice().sort(sort))
+  t.deepEqual(nodeWebkit, nodeWebkit.slice().sort(sort))
   t.end()
 })
