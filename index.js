@@ -93,9 +93,9 @@ var deprecatedTargets = [
 var futureTargets = []
 
 var allTargets = deprecatedTargets
-      .concat(supportedTargets)
-      .concat(additionalTargets)
-      .concat(futureTargets)
+  .concat(supportedTargets)
+  .concat(additionalTargets)
+  .concat(futureTargets)
 
 exports.getAbi = getAbi
 exports.getTarget = getTarget
