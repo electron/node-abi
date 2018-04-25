@@ -55,6 +55,7 @@ var supportedTargets = [
   {runtime: 'node', target: '7.0.0', abi: '51', lts: false},
   {runtime: 'node', target: '8.0.0', abi: '57', lts: false},
   {runtime: 'node', target: '9.0.0', abi: '59', lts: new Date() < new Date(2019, 12, 31)},
+  {runtime: 'node', target: '10.0.0', abi: '64', lts: false},
   {runtime: 'electron', target: '0.36.0', abi: '47', lts: false},
   {runtime: 'electron', target: '1.1.0', abi: '48', lts: false},
   {runtime: 'electron', target: '1.3.0', abi: '49', lts: false},
