@@ -29,7 +29,7 @@
   "devDependencies": {
     "standard": "^11.0.0",
     "tape": "^4.6.3",
-    "semantic-release": "^8.0.0"
+    "semantic-release": "^11.0.2"
   },
   "dependencies": {
     "semver": "^5.4.1"
