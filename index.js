@@ -99,7 +99,6 @@ var deprecatedTargets = [
 ]
 
 var futureTargets = [
-  {runtime: 'electron', target: '5.0.0-beta.0', abi: '68', lts: false}
 ]
 
 var allTargets = deprecatedTargets
