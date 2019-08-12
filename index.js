@@ -100,6 +100,7 @@ var deprecatedTargets = [
 ]
 
 var futureTargets = [
+  {runtime: 'electron', target: '7.0.0-beta.0', abi: '75', lts: false}
 ]
 
 var allTargets = deprecatedTargets
