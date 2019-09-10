@@ -52,7 +52,7 @@ var supportedTargets = [
   {runtime: 'node', target: '5.0.0', abi: '47', lts: false},
   {runtime: 'node', target: '6.0.0', abi: '48', lts: false},
   {runtime: 'node', target: '7.0.0', abi: '51', lts: false},
-  {runtime: 'node', target: '8.0.0', abi: '57', lts: new Date() < new Date(2019, 4, 31)},
+  {runtime: 'node', target: '8.0.0', abi: '57', lts: false},
   {runtime: 'node', target: '9.0.0', abi: '59', lts: false},
   {runtime: 'node', target: '10.0.0', abi: '64', lts: new Date(2018, 10, 1) < new Date() && new Date() < new Date(2020, 4, 31)},
   {runtime: 'node', target: '11.0.0', abi: '67', lts: false},
