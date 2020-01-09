@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/lgeiger/node-abi#readme",
   "devDependencies": {
-    "semantic-release": "^15.8.0",
+    "semantic-release": "^16.0.0",
     "tape": "^4.6.3",
     "travis-deploy-once": "^5.0.1"
   },
