@@ -72,7 +72,8 @@ var supportedTargets = [
   {runtime: 'electron', target: '4.0.4', abi: '69', lts: false},
   {runtime: 'electron', target: '5.0.0', abi: '70', lts: false},
   {runtime: 'electron', target: '6.0.0', abi: '73', lts: false},
-  {runtime: 'electron', target: '7.0.0', abi: '75', lts: false}
+  {runtime: 'electron', target: '7.0.0', abi: '75', lts: false},
+  {runtime: 'electron', target: '8.0.0', abi: '76', lts: false}
 ]
 
 var additionalTargets = [
@@ -102,7 +103,6 @@ var deprecatedTargets = [
 ]
 
 var futureTargets = [
-  {runtime: 'electron', target: '8.0.0-beta.0', abi: '76', lts: false}
 ]
 
 var allTargets = deprecatedTargets
