@@ -5,7 +5,7 @@ var getTarget = require('../index').getTarget
 var getNextTarget = require('../index')._getNextTarget
 var allTargets = require('../index').allTargets
 
-test('getNextTarget gets the next unsopported target', function (t) {
+test('getNextTarget gets the next unsupported target', function (t) {
   var mockTargets = [
     {runtime: 'node', target: '7.0.0', abi: '51', lts: false},
     {runtime: 'node', target: '8.0.0', abi: '57', lts: false},
@@ -35,6 +35,7 @@ test('getTarget calculates correct Electron target', function (t) {
   t.equal(getTarget('48', 'electron'), '1.1.0')
   t.equal(getTarget('49', 'electron'), '1.3.0')
   t.equal(getTarget('50', 'electron'), '1.4.0')
+  t.equal(getTarget('76', 'electron'), '8.0.0')
   t.end()
 })
 
@@ -53,6 +54,7 @@ test('getAbi calculates correct Node ABI', function (t) {
   t.equal(getAbi(null), process.versions.modules)
   t.throws(function () { getAbi('a.b.c') })
   t.throws(function () { getAbi(getNextTarget('node')) })
+  t.equal(getAbi('12.0.0'), '68')
   t.equal(getAbi('7.2.0'), '51')
   t.equal(getAbi('7.0.0'), '51')
   t.equal(getAbi('6.9.9'), '48')
@@ -155,8 +157,8 @@ test('allTargets are sorted', function (t) {
     return semver.compare(t1.target, t2.target)
   }
 
-  t.deepEqual(electron, electron.slice().sort(sort))
-  t.deepEqual(node, node.slice().sort(sort))
-  t.deepEqual(nodeWebkit, nodeWebkit.slice().sort(sort))
+  t.deepEqual(electron, electron.slice().sort(sort), 'electron targets are sorted')
+  t.deepEqual(node, node.slice().sort(sort), 'node targets are sorted')
+  t.deepEqual(nodeWebkit, nodeWebkit.slice().sort(sort), 'node-webkit targets are sorted')
   t.end()
 })
