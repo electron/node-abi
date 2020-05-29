@@ -88,6 +88,7 @@ test('getAbi calculates correct Node ABI', function (t) {
 test('getAbi calculates correct Electron ABI', function (t) {
   t.throws(function () { getAbi(undefined, 'electron') })
   t.throws(function () { getAbi(getNextTarget('electron'), 'electron') })
+  t.equal(getAbi('10.0.0-beta.1', 'electron'), '82')
   t.equal(getAbi('9.0.0', 'electron'), '80')
   t.equal(getAbi('8.0.0', 'electron'), '76')
   t.equal(getAbi('7.0.0', 'electron'), '75')

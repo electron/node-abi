@@ -104,7 +104,9 @@ var deprecatedTargets = [
   {runtime: 'electron', target: '0.33.0', abi: '46', lts: false}
 ]
 
-var futureTargets = []
+var futureTargets = [
+  {runtime: 'electron', target: '10.0.0-beta.1', abi: '82', lts: false}
+]
 
 var allTargets = deprecatedTargets
   .concat(supportedTargets)
