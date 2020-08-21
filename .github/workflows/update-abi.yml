@@ -22,7 +22,7 @@ jobs:
           ${{ runner.os }}-node-
     - run: npm install
     - name: Update Releases JSON
-      run: npm run electron-releases
+      run: npm run update-abi-registry
     - name: Commit Changes to Releases JSON
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
