@@ -53,19 +53,19 @@
   },
   {
     "runtime": "electron",
-    "target": "9.0.0-beta.1",
+    "target": "9.0.0",
     "lts": false,
-    "future": true,
+    "future": false,
     "abi": "80"
   },
   {
     "runtime": "node",
     "target": "14.0.0",
     "lts": [
-      "2020-10-20",
+      "2020-10-27",
       "2021-10-19"
     ],
-    "future": true,
+    "future": false,
     "abi": "81"
   },
   {
@@ -74,5 +74,19 @@
     "lts": false,
     "future": true,
     "abi": "82"
+  },
+  {
+    "runtime": "node",
+    "target": "15.0.0",
+    "lts": false,
+    "future": true,
+    "abi": "84"
+  },
+  {
+    "runtime": "electron",
+    "target": "11.0.0-beta.1",
+    "lts": false,
+    "future": true,
+    "abi": "85"
   }
 ]
