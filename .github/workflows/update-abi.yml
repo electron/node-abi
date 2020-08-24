@@ -20,10 +20,10 @@ jobs:
         key: ${{ runner.os }}-node-${{ hashFiles('**/package.json') }}
         restore-keys: |
           ${{ runner.os }}-node-
-    - run: npm install
-    - name: Update Releases JSON
+    - run: npm install --no-package-lock
+    - name: Update ABI registry
       run: npm run update-abi-registry
-    - name: Commit Changes to Releases JSON
+    - name: Commit Changes to ABI registry
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
@@ -31,10 +31,10 @@ jobs:
         chmod 600 ~/.netrc
         git add abi_registry.json
         if test -n "$(git status -s)"; then
-          git config user.name "$GITHUB_ACTOR"
-          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          git config user.name "GitHub Actions"
+          git config user.email "github-actions@users.noreply.github.com"
           git diff --cached
-          git commit -m "build: update Electron releases JSON"
+          git commit -m "feat: update ABI registry"
           git push origin HEAD:$GITHUB_REF
         else
           echo No update needed
