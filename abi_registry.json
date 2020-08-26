@@ -70,9 +70,9 @@
   },
   {
     "runtime": "electron",
-    "target": "10.0.0-beta.1",
+    "target": "10.0.0",
     "lts": false,
-    "future": true,
+    "future": false,
     "abi": "82"
   },
   {
