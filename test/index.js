@@ -26,6 +26,8 @@ test('getTarget calculates correct Node target', function (t) {
   t.equal(getTarget('47'), '5.0.0')
   t.equal(getTarget('48'), '6.0.0')
   t.equal(getTarget('51'), '7.0.0')
+  t.equal(getTarget('72'), '12.0.0')
+  t.equal(getTarget('83'), '14.0.0')
   t.end()
 })
 
@@ -36,6 +38,7 @@ test('getTarget calculates correct Electron target', function (t) {
   t.equal(getTarget('49', 'electron'), '1.3.0')
   t.equal(getTarget('50', 'electron'), '1.4.0')
   t.equal(getTarget('76', 'electron'), '8.0.0')
+  t.equal(getTarget('82', 'electron'), '10.0.0')
   t.end()
 })
 
