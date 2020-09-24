@@ -1,12 +1,5 @@
 [
   {
-    "runtime": "node",
-    "target": "11.0.0",
-    "lts": false,
-    "future": false,
-    "abi": "67"
-  },
-  {
     "runtime": "electron",
     "target": "5.0.0",
     "lts": false,
@@ -21,7 +14,7 @@
       "2020-11-30"
     ],
     "future": false,
-    "abi": "68"
+    "abi": "71"
   },
   {
     "runtime": "electron",
@@ -49,7 +42,7 @@
     "target": "13.0.0",
     "lts": false,
     "future": false,
-    "abi": "74"
+    "abi": "78"
   },
   {
     "runtime": "electron",
@@ -59,6 +52,13 @@
     "abi": "80"
   },
   {
+    "runtime": "electron",
+    "target": "10.0.0",
+    "lts": false,
+    "future": false,
+    "abi": "82"
+  },
+  {
     "runtime": "node",
     "target": "14.0.0",
     "lts": [
@@ -66,14 +66,7 @@
       "2021-10-19"
     ],
     "future": false,
-    "abi": "81"
-  },
-  {
-    "runtime": "electron",
-    "target": "10.0.0",
-    "lts": false,
-    "future": false,
-    "abi": "82"
+    "abi": "83"
   },
   {
     "runtime": "electron",
