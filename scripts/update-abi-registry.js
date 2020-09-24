@@ -55,7 +55,7 @@ async function main () {
 
     let target
     if (abiVersion.runtime === 'node') {
-      const nodeVersion = `${abiVersion.versions.replace('.0.0-pre', '')}.0.0`
+      const nodeVersion = abiVersion.versions.replace('-pre', '')
       target = nodeVersions[nodeVersion]
       if (!target) {
         continue
@@ -76,7 +76,6 @@ async function main () {
         }
       }
     }
-    target.abi = abiVersion.modules.toString()
 
     const key = [target.runtime, target.target].join('-')
     if (abiVersionSet.has(key)) {
@@ -84,7 +83,10 @@ async function main () {
     }
 
     abiVersionSet.add(key)
-    supportedTargets.unshift(target)
+    supportedTargets.unshift({
+      ...target,
+      abi: abiVersion.modules.toString()
+    })
   }
 
   await writeFile(path.resolve(__dirname, '..', 'abi_registry.json'), JSON.stringify(supportedTargets, null, 2))
