@@ -34,7 +34,9 @@ async function fetchNodeVersions () {
 }
 
 async function fetchAbiVersions () {
-  return (await getJSONFromCDN('nodejs/node/doc/abi_version_registry.json')).NODE_MODULE_VERSION
+  return (await getJSONFromCDN('nodejs/node/doc/abi_version_registry.json'))
+    .NODE_MODULE_VERSION
+    .filter(({ modules }) => modules > 66)
 }
 
 async function main () {
@@ -45,10 +47,7 @@ async function main () {
   const abiVersionSet = new Set()
   const supportedTargets = []
   for (const abiVersion of abiVersions) {
-    if (abiVersion.modules <= 66) {
-      // Don't try to parse any ABI versions older than 60
-      break
-    } else if (abiVersion.runtime === 'electron' && abiVersion.modules < 70) {
+    if (abiVersion.runtime === 'electron' && abiVersion.modules < 70) {
       // Don't try to parse Electron ABI versions below Electron 5
       continue
     }
