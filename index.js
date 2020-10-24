@@ -43,7 +43,12 @@ function getTarget (abi, runtime) {
     .map(function (t) {
       return t.target
     })
-  if (match.length) return match[0]
+  if (match.length) {
+    var betaSeparatorIndex = match[0].indexOf("-")
+    return betaSeparatorIndex > -1
+      ? match[0].substring(0, betaSeparatorIndex)
+      : match[0]
+  }
 
   throw new Error('Could not detect target for abi ' + abi + ' and runtime ' + runtime)
 }
