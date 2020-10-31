@@ -39,7 +39,7 @@ async function fetchAbiVersions () {
     .filter(({ modules }) => modules > 66)
 }
 
-function electronTargetsByModules(releases) {
+function electronReleasesToTargets (releases) {
   const versions = releases.map(({ version }) => version)
   const versionsByModules = releases
     .filter(release => release.deps && Number(release.deps.modules) >= 70)
@@ -75,49 +75,37 @@ function electronTargetsByModules(releases) {
       )
 }
 
+function nodeVersionsToTargets (abiVersions, nodeVersions) {
+  return Object.values(
+    abiVersions
+      .filter(({ runtime }) => runtime === 'node')
+      .reduce(
+        (acc, abiVersion) => {
+          const { version: nodeVersion } = semver.coerce(abiVersion.versions)
+
+          return {
+            [nodeVersion]: {
+              ...nodeVersions[nodeVersion],
+              abi: abiVersion.modules.toString(),
+            },
+            ...acc,
+          };
+        },
+        {}
+      )
+  )
+}
+
 async function main () {
   const nodeVersions = await fetchNodeVersions()
   const abiVersions = await fetchAbiVersions()
   const electronReleases = await fetchElectronReleases()
-  const electronTargets = electronTargetsByModules(electronReleases)
-
-  const abiVersionSet = new Set()
-  const supportedTargets = []
-  for (const abiVersion of abiVersions) {
-    let target
-    if (abiVersion.runtime === 'node') {
-      const { version: nodeVersion } = semver.coerce(abiVersion.versions)
-      target = nodeVersions[nodeVersion]
-      if (!target) {
-        continue
-      }
-    } else {
-      target = {
-        runtime: abiVersion.runtime === 'nw.js' ? 'node-webkit' : abiVersion.runtime,
-        target: abiVersion.versions,
-        lts: false,
-        future: false
-      }
-      if (target.runtime === 'electron') {
-        continue
-      }
-    }
-
-    const key = [target.runtime, target.target].join('-')
-    if (abiVersionSet.has(key)) {
-      continue
-    }
-
-    abiVersionSet.add(key)
-    supportedTargets.unshift({
-      ...target,
-      abi: abiVersion.modules.toString()
-    })
-  }
-
-  for (const electronTarget of electronTargets) {
-    supportedTargets.push(electronTarget)
-  }
+  const electronTargets = electronReleasesToTargets(electronReleases)
+  const nodeTargets = nodeVersionsToTargets(abiVersions, nodeVersions)
+  const supportedTargets = [
+    ...nodeTargets,
+    ...electronTargets,
+  ]
 
   await writeFile(path.resolve(__dirname, '..', 'abi_registry.json'), JSON.stringify(supportedTargets, null, 2))
 }
