@@ -53,6 +53,10 @@ function getTarget (abi, runtime) {
   throw new Error('Could not detect target for abi ' + abi + ' and runtime ' + runtime)
 }
 
+function sortByTargetFn (a, b) {
+  return Number(a.abi) > Number(b.abi) && a.target > b.target
+}
+
 function loadGeneratedTargets () {
   var registry = require('./abi_registry.json')
   var targets = {
@@ -85,9 +89,9 @@ function loadGeneratedTargets () {
     }
   })
 
-  targets.supported.sort()
-  targets.additional.sort()
-  targets.future.sort()
+  targets.supported.sort(sortByTargetFn)
+  targets.additional.sort(sortByTargetFn)
+  targets.future.sort(sortByTargetFn)
 
   return targets
 }
