@@ -86,7 +86,7 @@ async function main () {
   for (const abiVersion of abiVersions) {
     let target
     if (abiVersion.runtime === 'node') {
-      const nodeVersion = abiVersion.versions.replace('-pre', '')
+      const { version: nodeVersion } = semver.coerce(abiVersion.versions)
       target = nodeVersions[nodeVersion]
       if (!target) {
         continue
