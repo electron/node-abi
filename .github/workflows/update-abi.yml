@@ -1,7 +1,6 @@
 name: Auto-update ABI JSON file
 on:
-  schedule:
-    - cron: '0 0 * * *'
+  push
 jobs:
   autoupdate:
     runs-on: ubuntu-latest
