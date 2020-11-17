@@ -43,9 +43,18 @@ function getTarget (abi, runtime) {
     .map(function (t) {
       return t.target
     })
-  if (match.length) return match[0]
+  if (match.length) {
+    var betaSeparatorIndex = match[0].indexOf("-")
+    return betaSeparatorIndex > -1
+      ? match[0].substring(0, betaSeparatorIndex)
+      : match[0]
+  }
 
   throw new Error('Could not detect target for abi ' + abi + ' and runtime ' + runtime)
+}
+
+function sortByTargetFn (a, b) {
+  return Number(a.abi) > Number(b.abi) && a.target > b.target
 }
 
 function loadGeneratedTargets () {
@@ -80,9 +89,9 @@ function loadGeneratedTargets () {
     }
   })
 
-  targets.supported.sort()
-  targets.additional.sort()
-  targets.future.sort()
+  targets.supported.sort(sortByTargetFn)
+  targets.additional.sort(sortByTargetFn)
+  targets.future.sort(sortByTargetFn)
 
   return targets
 }
