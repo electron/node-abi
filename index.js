@@ -53,8 +53,12 @@ function getTarget (abi, runtime) {
   throw new Error('Could not detect target for abi ' + abi + ' and runtime ' + runtime)
 }
 
-function sortByAbiFn (a, b) {
-  return Number(a.abi) - Number(b.abi)
+function sortByTargetFn (a, b) {
+  var abiComp = Number(a.abi) - Number(b.abi)
+  if (abiComp !== 0) return abiComp
+  if (a.target < b.target) return -1
+  if (a.target > b.target) return 1
+  return 0
 }
 
 function loadGeneratedTargets () {
@@ -89,9 +93,9 @@ function loadGeneratedTargets () {
     }
   })
 
-  targets.supported.sort(sortByAbiFn)
-  targets.additional.sort(sortByAbiFn)
-  targets.future.sort(sortByAbiFn)
+  targets.supported.sort(sortByTargetFn)
+  targets.additional.sort(sortByTargetFn)
+  targets.future.sort(sortByTargetFn)
 
   return targets
 }
