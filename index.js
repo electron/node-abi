@@ -54,7 +54,11 @@ function getTarget (abi, runtime) {
 }
 
 function sortByTargetFn (a, b) {
-  return Number(a.abi) > Number(b.abi) && a.target > b.target
+  var abiComp = Number(a.abi) - Number(b.abi)
+  if (abiComp !== 0) return abiComp
+  if (a.target < b.target) return -1
+  if (a.target > b.target) return 1
+  return 0
 }
 
 function loadGeneratedTargets () {
