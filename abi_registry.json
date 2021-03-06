@@ -101,6 +101,6 @@
     "future": true,
     "lts": false,
     "runtime": "electron",
-    "target": "13.0.0-nightly.20201124"
+    "target": "13.0.0-beta.2"
   }
 ]
