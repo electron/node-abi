@@ -108,7 +108,7 @@
   },
   {
     "abi": "89",
-    "future": true,
+    "future": false,
     "lts": false,
     "runtime": "electron",
     "target": "13.0.0-beta.2"
