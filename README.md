@@ -47,4 +47,4 @@ nodeAbi.futureTargets
 
 - https://github.com/lgeiger/electron-abi
 - https://nodejs.org/en/download/releases/
-- https://github.com/nodejs/LTS
+- https://github.com/nodejs/Release
