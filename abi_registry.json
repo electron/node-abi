@@ -79,6 +79,13 @@
     "target": "8.0.0-beta.1"
   },
   {
+    "abi": "76",
+    "future": false,
+    "lts": false,
+    "runtime": "electron",
+    "target": "9.0.0-beta.1"
+  },
+  {
     "abi": "80",
     "future": false,
     "lts": false,
@@ -91,6 +98,13 @@
     "lts": false,
     "runtime": "electron",
     "target": "10.0.0-beta.1"
+  },
+  {
+    "abi": "82",
+    "future": false,
+    "lts": false,
+    "runtime": "electron",
+    "target": "11.0.0-beta.1"
   },
   {
     "abi": "85",
@@ -111,6 +125,20 @@
     "future": false,
     "lts": false,
     "runtime": "electron",
+    "target": "14.0.0-beta.1"
+  },
+  {
+    "abi": "89",
+    "future": false,
+    "lts": false,
+    "runtime": "electron",
     "target": "13.0.0-beta.2"
+  },
+  {
+    "abi": "89",
+    "future": true,
+    "lts": false,
+    "runtime": "electron",
+    "target": "15.0.0-alpha.1"
   }
 ]
