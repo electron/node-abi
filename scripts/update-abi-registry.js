@@ -9,7 +9,8 @@ async function getJSONFromCDN (urlPath) {
 }
 
 async function fetchElectronReleases () {
-  return (await getJSONFromCDN('electron/releases/lite.json'))
+  const response = await got(`https://electronjs.org/headers/index.json`)
+  return JSON.parse(response.body)
 }
 
 async function fetchNodeVersions () {
@@ -42,22 +43,27 @@ async function fetchAbiVersions () {
 function electronReleasesToTargets (releases) {
   const versions = releases.map(({ version }) => version)
   const versionsByModules = releases
-    .filter(release => release.deps && Number(release.deps.modules) >= 70)
-    .map(({ version, deps: { modules } }) => ({
+    .filter(release => Number(release.modules) >= 70)
+    .map(({ version, modules }) => ({
       version,
       modules,
     }))
+    .filter(({ version }) => !version.includes('nightly'))
+    .sort((a, b) => Number(a.modules) - Number(b.modules))
     .reduce(
       (acc, { modules, version }) => ({
         ...acc,
-        [modules]: version,
+        [`${version.split('.')[0]}-${modules}`]: {
+          version,
+          modules,
+        }
       }),
       {}
     )
 
     return Object.entries(versionsByModules)
       .map(
-        ([modules, version]) => ({
+        ([major, {version, modules}]) => ({
           abi: modules,
           future: !versions.find(
             v => {
