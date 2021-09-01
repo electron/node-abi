@@ -6,7 +6,6 @@
   "scripts": {
     "semantic-release": "semantic-release",
     "test": "tape test/index.js",
-    "travis-deploy-once": "travis-deploy-once",
     "update-abi-registry": "node --unhandled-rejections=strict scripts/update-abi-registry.js"
   },
   "repository": {
@@ -27,12 +26,14 @@
   },
   "homepage": "https://github.com/lgeiger/node-abi#readme",
   "devDependencies": {
-    "got": "^10.6.0",
-    "semantic-release": "^15.8.0",
-    "tape": "^4.6.3",
-    "travis-deploy-once": "^5.0.1"
+    "@continuous-auth/semantic-release-npm": "^2.0.0",
+    "got": "^11.8.2",
+    "tape": "^5.3.1"
   },
   "dependencies": {
-    "semver": "^5.4.1"
+    "semver": "^7.3.5"
+  },
+  "engines": {
+    "node": ">=10"
   }
 }
