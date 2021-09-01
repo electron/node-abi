@@ -16,8 +16,6 @@ steps-test: &steps-test
     - run: yarn test
 
 version: 2.1
-orbs:
-  win: circleci/windows@1.0.0
 jobs:
   test-linux-10:
     docker:
@@ -30,15 +28,6 @@ jobs:
   test-linux-14:
     docker:
       - image: circleci/node:14
-    <<: *steps-test
-  test-mac:
-    macos:
-      xcode: "10.2.0"
-    <<: *steps-test
-  test-windows:
-    executor:
-      name: win/vs2019
-      shell: bash.exe
     <<: *steps-test
 
   release:
@@ -57,15 +46,11 @@ workflows:
       - test-linux-10
       - test-linux-12
       - test-linux-14
-      - test-mac
-      - test-windows
       - release:
           requires:
             - test-linux-10
             - test-linux-12
             - test-linux-14
-            - test-mac
-            - test-windows
           filters:
             branches:
               only:
