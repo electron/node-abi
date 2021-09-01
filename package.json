@@ -26,6 +26,7 @@
   },
   "homepage": "https://github.com/lgeiger/node-abi#readme",
   "devDependencies": {
+    "@continuous-auth/semantic-release-npm": "^2.0.0",
     "got": "^10.6.0",
     "semantic-release": "^15.8.0",
     "tape": "^4.6.3"
