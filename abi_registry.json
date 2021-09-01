@@ -122,7 +122,7 @@
   },
   {
     "abi": "89",
-    "future": true,
+    "future": false,
     "lts": false,
     "runtime": "electron",
     "target": "15.0.0-alpha.1"
@@ -140,5 +140,12 @@
     "lts": false,
     "runtime": "electron",
     "target": "14.0.0-beta.1"
+  },
+  {
+    "abi": "89",
+    "future": true,
+    "lts": false,
+    "runtime": "electron",
+    "target": "15.0.0-beta.1"
   }
 ]
