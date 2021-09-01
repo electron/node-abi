@@ -16,10 +16,33 @@ steps-test: &steps-test
     - run: yarn test
 
 version: 2.1
+orbs:
+  win: circleci/windows@1.0.0
 jobs:
-  test:
+  test-linux-8:
+    docker:
+      - image: circleci/node:8
+    <<: *steps-test
+  test-linux-10:
+    docker:
+      - image: circleci/node:10
+    <<: *steps-test
+  test-linux-12:
+    docker:
+      - image: circleci/node:12
+    <<: *steps-test
+  test-linux-14:
+    docker:
+      - image: circleci/node:14
+    <<: *steps-test
+  test-mac:
     macos:
-      xcode: "12.2.0"
+      xcode: "10.2.0"
+    <<: *steps-test
+  test-windows:
+    executor:
+      name: win/vs2019
+      shell: bash.exe
     <<: *steps-test
 
   release:
@@ -33,11 +56,18 @@ jobs:
 workflows:
   version: 2
   test_and_release:
+    # Run test jobs first, release only when all the test jobs are successful
     jobs:
-      - test
+      - test-linux-8
+      - test-linux-10
+      - test-mac
+      - test-windows
       - release:
           requires:
-            - test
+            - test-linux-8
+            - test-linux-10
+            - test-mac
+            - test-windows
           filters:
             branches:
               only:
