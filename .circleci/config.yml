@@ -13,7 +13,6 @@ steps-test: &steps-test
         paths:
           - node_modules
         key: v1-dependencies-{{ arch }}-{{ checksum "yarn.lock" }}
-    - run: yarn build
     - run: yarn test
 
 version: 2.1
