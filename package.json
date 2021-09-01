@@ -6,7 +6,6 @@
   "scripts": {
     "semantic-release": "semantic-release",
     "test": "tape test/index.js",
-    "travis-deploy-once": "travis-deploy-once",
     "update-abi-registry": "node --unhandled-rejections=strict scripts/update-abi-registry.js"
   },
   "repository": {
@@ -29,8 +28,7 @@
   "devDependencies": {
     "got": "^10.6.0",
     "semantic-release": "^15.8.0",
-    "tape": "^4.6.3",
-    "travis-deploy-once": "^5.0.1"
+    "tape": "^4.6.3"
   },
   "dependencies": {
     "semver": "^5.4.1"
