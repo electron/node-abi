@@ -32,5 +32,8 @@
   },
   "dependencies": {
     "semver": "^7.3.5"
+  },
+  "engines": {
+    "node": ">=10"
   }
 }
