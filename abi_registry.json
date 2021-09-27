@@ -125,6 +125,13 @@
     "future": false,
     "lts": false,
     "runtime": "electron",
+    "target": "13.0.0-beta.2"
+  },
+  {
+    "abi": "89",
+    "future": false,
+    "lts": false,
+    "runtime": "electron",
     "target": "15.0.0-alpha.1"
   },
   {
@@ -133,13 +140,6 @@
     "lts": false,
     "runtime": "electron",
     "target": "14.0.0-beta.1"
-  },
-  {
-    "abi": "89",
-    "future": false,
-    "lts": false,
-    "runtime": "electron",
-    "target": "13.0.0-beta.2"
   },
   {
     "abi": "98",
