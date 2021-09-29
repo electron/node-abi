@@ -142,6 +142,13 @@
     "target": "14.0.0-beta.1"
   },
   {
+    "abi": "97",
+    "future": false,
+    "lts": false,
+    "runtime": "electron",
+    "target": "14.0.2"
+  },
+  {
     "abi": "98",
     "future": false,
     "lts": false,
