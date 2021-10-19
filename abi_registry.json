@@ -51,6 +51,13 @@
     "abi": "93"
   },
   {
+    "runtime": "node",
+    "target": "17.0.0",
+    "lts": false,
+    "future": false,
+    "abi": "102"
+  },
+  {
     "abi": "70",
     "future": false,
     "lts": false,
