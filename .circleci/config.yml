@@ -29,6 +29,10 @@ jobs:
     docker:
       - image: circleci/node:14
     <<: *steps-test
+  test-linux-16:
+    docker:
+      - image: circleci/node:16
+    <<: *steps-test
 
   release:
     docker:
@@ -46,11 +50,13 @@ workflows:
       - test-linux-10
       - test-linux-12
       - test-linux-14
+      - test-linux-16
       - release:
           requires:
             - test-linux-10
             - test-linux-12
             - test-linux-14
+            - test-linux-16
           filters:
             branches:
               only:

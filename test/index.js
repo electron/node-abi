@@ -41,6 +41,7 @@ test('getTarget calculates correct Electron target', function (t) {
   t.equal(getTarget('50', 'electron'), '1.4.0')
   t.equal(getTarget('76', 'electron'), '8.0.0')
   t.equal(getTarget('82', 'electron'), '10.0.0')
+  t.equal(getTarget('89', 'electron'), '13.0.0')
   t.end()
 })
 
@@ -99,9 +100,12 @@ test('getAbi calculates correct Node ABI', function (t) {
 test('getAbi calculates correct Electron ABI', function (t) {
   t.throws(function () { getAbi(undefined, 'electron') })
   t.throws(function () { getAbi(getNextTarget('electron'), 'electron') })
-  t.equal(getAbi('14.0.0', 'electron'), '89')
+  t.equal(getAbi('15.0.0-beta.1', 'electron'), '89')
   t.equal(getAbi('14.1.1', 'electron'), '97')
-  t.equal(getAbi('10.0.0-beta.1', 'electron'), '82')
+  t.equal(getAbi('14.0.0', 'electron'), '89')
+  t.equal(getAbi('13.0.0', 'electron'), '89')
+  t.equal(getAbi('12.0.0', 'electron'), '87')
+  t.equal(getAbi('11.0.0', 'electron'), '85')
   t.equal(getAbi('10.0.0', 'electron'), '82')
   t.equal(getAbi('9.0.0', 'electron'), '80')
   t.equal(getAbi('8.0.0', 'electron'), '76')
