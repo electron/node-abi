@@ -99,6 +99,8 @@ test('getAbi calculates correct Node ABI', function (t) {
 test('getAbi calculates correct Electron ABI', function (t) {
   t.throws(function () { getAbi(undefined, 'electron') })
   t.throws(function () { getAbi(getNextTarget('electron'), 'electron') })
+  t.equal(getAbi('14.0.0', 'electron'), '89')
+  t.equal(getAbi('14.1.1', 'electron'), '97')
   t.equal(getAbi('10.0.0-beta.1', 'electron'), '82')
   t.equal(getAbi('10.0.0', 'electron'), '82')
   t.equal(getAbi('9.0.0', 'electron'), '80')
@@ -156,19 +158,5 @@ test('getAbi supports leading v', function (t) {
 
 test('getAbi returns abi if passed as target', function (t) {
   t.equal(getAbi('57'), '57')
-  t.end()
-})
-
-test('allTargets are sorted', function (t) {
-  var electron = allTargets.filter(function (t) { return t.runtime === 'electron' })
-  var node = allTargets.filter(function (t) { return t.runtime === 'node' })
-  var nodeWebkit = allTargets.filter(function (t) { return t.runtime === 'node-webkit' })
-  function sort (t1, t2) {
-    return semver.compare(t1.target, t2.target)
-  }
-
-  t.deepEqual(electron, electron.slice().sort(sort), 'electron targets are sorted')
-  t.deepEqual(node, node.slice().sort(sort), 'node targets are sorted')
-  t.deepEqual(nodeWebkit, nodeWebkit.slice().sort(sort), 'node-webkit targets are sorted')
   t.end()
 })
