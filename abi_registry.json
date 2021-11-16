@@ -52,7 +52,7 @@
   },
   {
     "runtime": "node",
-    "target": "17.0.1",
+    "target": "17.0.0",
     "lts": false,
     "future": false,
     "abi": "102"
