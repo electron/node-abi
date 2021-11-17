@@ -168,5 +168,12 @@
     "lts": false,
     "runtime": "electron",
     "target": "16.0.0-alpha.1"
+  },
+  {
+    "abi": "101",
+    "future": true,
+    "lts": false,
+    "runtime": "electron",
+    "target": "17.0.0-alpha.1"
   }
 ]
