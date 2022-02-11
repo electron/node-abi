@@ -58,16 +58,6 @@
     "abi": "102"
   },
   {
-    "runtime": "node",
-    "target": "18.0.0",
-    "lts": [
-      "2022-10-25",
-      "2023-10-18"
-    ],
-    "future": true,
-    "abi": "105"
-  },
-  {
     "abi": "70",
     "future": false,
     "lts": false,
