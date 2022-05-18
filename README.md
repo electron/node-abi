@@ -1,6 +1,7 @@
 # Node.js ABI
 
-[![Build Status](https://circleci.com/gh/electron/node-abi/tree/main.svg?style=shield)](https://circleci.com/gh/electron/node-abi/?branch=main) [![Snyk badge](https://snyk.io/test/github/electron/node-abi/badge.svg)](https://snyk.io/test/github/electron/node-abi)
+[![Build Status](https://circleci.com/gh/electron/node-abi/tree/main.svg?style=shield)](https://circleci.com/gh/electron/node-abi/?branch=main)
+[![Snyk badge](https://snyk.io/test/github/electron/node-abi/badge.svg)](https://snyk.io/test/github/electron/node-abi)
 
 Get the Node ABI (application binary interface) for a given target and runtime, and vice versa.
 
