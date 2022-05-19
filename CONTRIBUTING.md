@@ -51,3 +51,12 @@ feat: Add amazing new feature
 
 BREAKING CHANGE: This removes support for Node 0.10 and 0.12.
 ```
+
+## Pull request guidelines
+
+Here are some things to keep in mind as you file pull requests to fix bugs, add new features, etc.:
+
+- CircleCI is used to make sure that the project builds packages as expected on the supported platforms, using supported Node.js versions.
+- Unless it's impractical, please write tests for your changes. This will help us so that we can spot regressions much easier.
+- Squashing commits during discussion of the pull request is almost always unnecessary, and makes it more difficult for both the submitters and reviewers to understand what changed in between comments. However, rebasing is encouraged when practical, particularly when there's a merge conflict.
+- If you are continuing the work of another person's PR and need to rebase/squash, please retain the attribution of the original author(s) and continue the work in subsequent commits.
