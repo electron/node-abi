@@ -17,6 +17,14 @@ async function fetchNodeVersions () {
   const schedule = await getJSONFromCDN('nodejs/Release/schedule.json')
   const versions = {}
 
+  // The target is set to X.0.0 by default, where X is the major version.
+  // Use targetOverride to specify a different target.
+  const targetOverride = {
+    // In Node 17.0.0, a header is missing and causes an error during compilation.
+    // See https://github.com/electron/node-abi/issues/114
+    '17.0.0': '17.0.1'
+  }
+
   for (const [majorVersion, metadata] of Object.entries(schedule)) {
     if (majorVersion.startsWith('v0')) {
       continue
@@ -25,7 +33,7 @@ async function fetchNodeVersions () {
     const lts = metadata.hasOwnProperty('lts') ? [metadata.lts, metadata.maintenance] : false
     versions[version] = {
       runtime: 'node',
-      target: version,
+      target: targetOverride.hasOwnProperty(version) ? targetOverride[version] : version,
       lts: lts,
       future: new Date(Date.parse(metadata.start)) > new Date()
     }

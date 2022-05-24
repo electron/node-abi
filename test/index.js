@@ -30,6 +30,8 @@ test('getTarget calculates correct Node target', function (t) {
   t.equal(getTarget('72'), '12.0.0')
   t.equal(getTarget('83'), '14.0.0')
   t.equal(getTarget('88'), '15.0.0')
+  t.equal(getTarget('93'), '16.0.0')
+  t.equal(getTarget('102'), '17.0.1')
   t.end()
 })
 
