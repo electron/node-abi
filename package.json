@@ -4,7 +4,6 @@
   "description": "Get the Node ABI for a given target and runtime, and vice versa.",
   "main": "index.js",
   "scripts": {
-    "semantic-release": "semantic-release",
     "test": "tape test/index.js",
     "update-abi-registry": "node --unhandled-rejections=strict scripts/update-abi-registry.js"
   },
