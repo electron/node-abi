@@ -1,6 +1,7 @@
 # Node.js ABI
 
-[![Build Status](https://travis-ci.org/lgeiger/node-abi.svg?branch=v1.0.0)](https://travis-ci.org/lgeiger/node-abi) [![Greenkeeper badge](https://badges.greenkeeper.io/lgeiger/node-abi.svg)](https://greenkeeper.io/)
+[![CircleCI build status](https://circleci.com/gh/electron/node-abi/tree/main.svg?style=shield)](https://circleci.com/gh/electron/node-abi/tree/main)
+[![npm version](http://img.shields.io/npm/v/node-abi.svg)](https://npmjs.org/package/node-abi)
 
 
 Get the Node ABI for a given target and runtime, and vice versa.
