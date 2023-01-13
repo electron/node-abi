@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/lgeiger/node-abi.git"
+    "url": "https://github.com/electron/node-abi.git"
   },
   "keywords": [
     "node",
@@ -21,9 +21,9 @@
   "author": "Lukas Geiger",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/lgeiger/node-abi/issues"
+    "url": "https://github.com/electron/node-abi/issues"
   },
-  "homepage": "https://github.com/lgeiger/node-abi#readme",
+  "homepage": "https://github.com/electron/node-abi#readme",
   "devDependencies": {
     "@continuous-auth/semantic-release-npm": "^3.0.0",
     "got": "^11.8.2",
