@@ -14,7 +14,7 @@ async function fetchElectronReleases () {
 }
 
 async function fetchNodeVersions () {
-  const schedule = await getJSONFromCDN('nodejs/Release/schedule.json')
+  const schedule = await getJSONFromCDN('nodejs/Release@main/schedule.json')
   const versions = {}
 
   for (const [majorVersion, metadata] of Object.entries(schedule)) {
@@ -35,7 +35,7 @@ async function fetchNodeVersions () {
 }
 
 async function fetchAbiVersions () {
-  return (await getJSONFromCDN('nodejs/node/doc/abi_version_registry.json'))
+  return (await getJSONFromCDN('nodejs/node@main/doc/abi_version_registry.json'))
     .NODE_MODULE_VERSION
     .filter(({ modules }) => modules > 66)
 }
