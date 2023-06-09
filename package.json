@@ -7,6 +7,9 @@
     "test": "tape test/index.js",
     "update-abi-registry": "node --unhandled-rejections=strict scripts/update-abi-registry.js"
   },
+  "files": [
+    "abi_registry.json"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/electron/node-abi.git"
