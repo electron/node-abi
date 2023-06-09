@@ -3,6 +3,22 @@ const path = require('path')
 const semver = require('semver')
 const { writeFile } = require('fs').promises
 
+function sortByElectronVersionFn (a, b) {
+  const modulesComp = Number(a.modules) - Number(b.modules)
+  if (modulesComp !== 0) return modulesComp
+  if (semver.lt(a.version, b.version)) return 1
+  if (semver.gt(a.version, b.version)) return -1
+  return 0
+}
+
+function sortByNodeVersionFn (a, b) {
+  const abiComp = Number(a.abi) - Number(b.abi)
+  if (abiComp !== 0) return abiComp
+  if (semver.lt(a.target, b.target)) return 1
+  if (semver.gt(a.target, b.target)) return -1
+  return 0
+}
+
 async function getJSONFromCDN (urlPath) {
   const response = await got(`https://cdn.jsdelivr.net/gh/${urlPath}`)
   return JSON.parse(response.body)
@@ -49,7 +65,7 @@ function electronReleasesToTargets (releases) {
       modules,
     }))
     .filter(({ version }) => !version.includes('nightly'))
-    .sort((a, b) => Number(a.modules) - Number(b.modules))
+    .sort(sortByElectronVersionFn)
     .reduce(
       (acc, { modules, version }) => ({
         ...acc,
@@ -99,7 +115,7 @@ function nodeVersionsToTargets (abiVersions, nodeVersions) {
         },
         {}
       )
-  )
+  ).sort(sortByNodeVersionFn)
 }
 
 async function main () {
