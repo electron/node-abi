@@ -8,8 +8,7 @@
     "update-abi-registry": "node --unhandled-rejections=strict scripts/update-abi-registry.js"
   },
   "files": [
-    "abi_registry.json",
-    "README.md"
+    "abi_registry.json"
   ],
   "repository": {
     "type": "git",
