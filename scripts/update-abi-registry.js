@@ -6,8 +6,8 @@ const { writeFile } = require('fs').promises
 function sortByElectronVersionFn (a, b) {
   const modulesComp = Number(a.modules) - Number(b.modules)
   if (modulesComp !== 0) return modulesComp
-  if (semver.lt(a.version, b.version)) return 1
-  if (semver.gt(a.version, b.version)) return -1
+  if (semver.lt(a.version, b.version)) return -1
+  if (semver.gt(a.version, b.version)) return 1
   return 0
 }
 
