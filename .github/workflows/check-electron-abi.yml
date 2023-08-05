@@ -1,0 +1,25 @@
+name: Check ABI for Electron Version
+
+on:
+  workflow_dispatch:
+    inputs:
+      electron-version:
+        type: string
+        description: Electron version to check (e.g. 26.0.0)
+
+permissions: {}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Setup Node.js
+      uses: actions/setup-node@64ed1c7eab4cce3362f8c340dee64e5eaeef8f7c  # tag: v3.6.0
+      with:
+        node-version: 18.x
+    - name: Create a Temporary package.json
+      run: npm init --yes
+    - name: Install latest node-abi
+      run: npm install --save-dev node-abi
+    - name: Check ABI for Electron version
+      run: node -e "const nodeAbi = require('node-abi'); console.log(nodeAbi.getAbi('${{ github.event.inputs.electron-version }}', 'electron'))"
