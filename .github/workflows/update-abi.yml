@@ -3,7 +3,7 @@ name: Auto-update ABI JSON file
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 * * * *'
+    - cron: '0 15-23,0-3 * * *'
 
 jobs:
   autoupdate:
