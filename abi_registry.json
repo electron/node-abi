@@ -268,7 +268,7 @@
   },
   {
     "abi": "118",
-    "future": true,
+    "future": false,
     "lts": false,
     "runtime": "electron",
     "target": "27.0.0-alpha.1"
