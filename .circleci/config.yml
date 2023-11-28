@@ -2,7 +2,7 @@ version: 2.1
 
 orbs:
   cfa: continuousauth/npm@2.1.0
-  node: electronjs/node@1.2.0
+  node: electronjs/node@2.1.0
 
 workflows:
   test_and_release:
@@ -20,10 +20,13 @@ workflows:
                 - node/macos
                 - node/windows
               node-version:
-                - 20.2.0
-                - 18.17.0
-                - 16.20.1
-                - 14.21.3
+                - '20.10'
+                - '18.18'
+                - '16.20'
+                - '14.21'
+            exclude:
+              - executor: node/macos
+                node-version: '14.21'
       - cfa/release:
           requires:
             - test
