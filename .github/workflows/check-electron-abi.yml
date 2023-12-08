@@ -7,6 +7,10 @@ on:
         type: string
         description: Electron version to check (e.g. 26.0.0)
         required: true
+      expected-abi:
+        type: string
+        description: Expected ABI number (e.g. 117)
+        required: true
 
 permissions: {}
 
@@ -23,4 +27,13 @@ jobs:
     - name: Install latest node-abi
       run: npm install --save-dev node-abi
     - name: Check ABI for Electron version
-      run: node -e "const nodeAbi = require('node-abi'); console.log(nodeAbi.getAbi('${{ github.event.inputs.electron-version }}', 'electron'))"
+      uses: actions/github-script@d7906e4ad0b1822421a7e6a35d5ca353c962f410 # v6.4.1
+      with:
+        script: |
+          const nodeAbi = require('node-abi');
+
+          const abi = nodeAbi.getAbi('${{ github.event.inputs.electron-version }}', 'electron');
+
+          if (abi !== ${{ github.event.inputs.expected-abi }}) {
+            process.exit = 1;
+          }
