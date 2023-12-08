@@ -33,6 +33,7 @@ jobs:
           const nodeAbi = require('node-abi');
 
           const abi = nodeAbi.getAbi('${{ github.event.inputs.electron-version }}', 'electron');
+          console.log('Got ABI:', abi);
 
           if (abi !== ${{ github.event.inputs.expected-abi }}) {
             process.exit = 1;
