@@ -36,5 +36,5 @@ jobs:
           console.log('Got ABI:', abi);
 
           if (abi !== ${{ github.event.inputs.expected-abi }}) {
-            process.exit = 1;
+            process.exitCode = 1;
           }
