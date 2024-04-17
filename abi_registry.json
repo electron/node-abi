@@ -306,6 +306,13 @@
   },
   {
     "abi": "123",
+    "future": true,
+    "lts": false,
+    "runtime": "electron",
+    "target": "31.0.0-alpha.1"
+  },
+  {
+    "abi": "123",
     "future": false,
     "lts": false,
     "runtime": "electron",
