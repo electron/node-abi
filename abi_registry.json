@@ -306,7 +306,7 @@
   },
   {
     "abi": "123",
-    "future": true,
+    "future": false,
     "lts": false,
     "runtime": "electron",
     "target": "31.0.0-alpha.1"
@@ -320,7 +320,7 @@
   },
   {
     "abi": "125",
-    "future": true,
+    "future": false,
     "lts": false,
     "runtime": "electron",
     "target": "31.0.0-beta.7"
