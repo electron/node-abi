@@ -338,5 +338,12 @@
     "lts": false,
     "runtime": "electron",
     "target": "32.0.0-alpha.1"
+  },
+  {
+    "abi": "130",
+    "future": true,
+    "lts": false,
+    "runtime": "electron",
+    "target": "33.0.0-alpha.1"
   }
 ]
