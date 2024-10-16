@@ -345,5 +345,12 @@
     "lts": false,
     "runtime": "electron",
     "target": "33.0.0-alpha.1"
+  },
+  {
+    "abi": "132",
+    "future": true,
+    "lts": false,
+    "runtime": "electron",
+    "target": "34.0.0-alpha.1"
   }
 ]
