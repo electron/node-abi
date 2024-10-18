@@ -28,7 +28,6 @@
   },
   "homepage": "https://github.com/electron/node-abi#readme",
   "devDependencies": {
-    "got": "^11.8.2",
     "tape": "^5.3.1"
   },
   "dependencies": {

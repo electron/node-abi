@@ -1,7 +1,7 @@
-const got = require('got')
-const path = require('path')
+const { writeFile } = require('node:fs/promises')
+const path = require('node:path')
+
 const semver = require('semver')
-const { writeFile } = require('fs').promises
 
 function sortByElectronVersionFn (a, b) {
   const modulesComp = Number(a.modules) - Number(b.modules)
@@ -20,13 +20,11 @@ function sortByNodeVersionFn (a, b) {
 }
 
 async function getJSONFromCDN (urlPath) {
-  const response = await got(`https://cdn.jsdelivr.net/gh/${urlPath}`)
-  return JSON.parse(response.body)
+  return fetch(`https://cdn.jsdelivr.net/gh/${urlPath}`).then((resp) => resp.json())
 }
 
 async function fetchElectronReleases () {
-  const response = await got(`https://electronjs.org/headers/index.json`)
-  return JSON.parse(response.body)
+  return fetch(`https://electronjs.org/headers/index.json`).then((resp) => resp.json())
 }
 
 async function fetchNodeVersions () {
