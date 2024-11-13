@@ -35,5 +35,8 @@
   },
   "engines": {
     "node": ">=10"
+  },
+  "publishConfig": {
+    "provenance": true
   }
 }
