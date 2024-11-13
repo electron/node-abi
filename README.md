@@ -1,6 +1,6 @@
 # Node.js ABI
 
-[![Build Status](https://circleci.com/gh/electron/node-abi/tree/main.svg?style=shield)](https://circleci.com/gh/electron/node-abi/tree/main)
+[![Build Status](https://github.com/electron/node-abi/actions/workflows/test.yml/badge.svg)](https://github.com/electron/node-abi/actions/workflows/test.yml)
 [![Auto-update ABI JSON file](https://github.com/electron/node-abi/actions/workflows/update-abi.yml/badge.svg)](https://github.com/electron/node-abi/actions/workflows/update-abi.yml)
 [![Snyk badge](https://snyk.io/test/github/electron/node-abi/badge.svg)](https://snyk.io/test/github/electron/node-abi)
 [![npm version](http://img.shields.io/npm/v/node-abi.svg)](https://npmjs.org/package/node-abi)
@@ -8,11 +8,13 @@
 Get the Node ABI (application binary interface) for a given target and runtime, and vice versa.
 
 ## Installation
-```
+
+```shell
 npm install node-abi
 ```
 
 ## Usage
+
 ```javascript
 const nodeAbi = require('node-abi')
 
