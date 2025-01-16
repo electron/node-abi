@@ -2,9 +2,10 @@
   "name": "node-abi",
   "version": "0.0.0-development",
   "description": "Get the Node ABI for a given target and runtime, and vice versa.",
-  "main": "index.js",
+  "type": "module",
+  "exports": "./index.js",
   "scripts": {
-    "test": "tape test/index.js",
+    "test": "node --test test/index.js",
     "update-abi-registry": "node --unhandled-rejections=strict scripts/update-abi-registry.js"
   },
   "files": [
@@ -27,14 +28,12 @@
     "url": "https://github.com/electron/node-abi/issues"
   },
   "homepage": "https://github.com/electron/node-abi#readme",
-  "devDependencies": {
-    "tape": "^5.3.1"
-  },
+  "devDependencies": {},
   "dependencies": {
-    "semver": "^7.3.5"
+    "semver": "^7.6.3"
   },
   "engines": {
-    "node": ">=10"
+    "node": ">=22.12.0"
   },
   "publishConfig": {
     "provenance": true

@@ -17,17 +17,11 @@ jobs:
     strategy:
       matrix:
         node-version:
-          - '20.10'
-          - '18.18'
-          - '16.20'
-          - '14.21'
+          - 22.12.x
         os:
           - macos-latest
           - ubuntu-latest
           - windows-latest
-        exclude:
-          - os: macos-latest
-            node-version: '14.21'
     runs-on: "${{ matrix.os }}"
     steps:
       - name: Checkout
