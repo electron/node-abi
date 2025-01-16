@@ -1,10 +1,10 @@
-var semver = require('semver')
+const semver = require('semver')
 
 function getNextTarget (runtime, targets) {
   if (targets == null) targets = allTargets
-  var latest = targets.filter(function (t) { return t.runtime === runtime }).slice(-1)[0]
-  var increment = runtime === 'electron' ? 'minor' : 'major'
-  var next = semver.inc(latest.target, increment)
+  const latest = targets.filter(function (t) { return t.runtime === runtime }).slice(-1)[0]
+  const increment = runtime === 'electron' ? 'minor' : 'major'
+  let next = semver.inc(latest.target, increment)
   // Electron releases appear in the registry in their beta form, sometimes there is
   // no active beta line.  During this time we need to double bump
   if (runtime === 'electron' && semver.parse(latest.target).prerelease.length) {
@@ -23,11 +23,11 @@ function getAbi (target, runtime) {
     if (target === process.versions.node) return process.versions.modules
   }
 
-  var abi
-  var lastTarget
+  let abi
+  let lastTarget
 
-  for (var i = 0; i < allTargets.length; i++) {
-    var t = allTargets[i]
+  for (let i = 0; i < allTargets.length; i++) {
+    const t = allTargets[i]
     if (t.runtime !== runtime) continue
     if (semver.lte(t.target, target) && (!lastTarget || semver.gte(t.target, lastTarget))) {
       abi = t.abi
@@ -45,7 +45,7 @@ function getTarget (abi, runtime) {
 
   if (runtime === 'node' && !abi) return process.versions.node
 
-  var match = allTargets
+  const match = allTargets
     .filter(function (t) {
       return t.abi === abi && t.runtime === runtime
     })
@@ -53,7 +53,7 @@ function getTarget (abi, runtime) {
       return t.target
     })
   if (match.length) {
-    var betaSeparatorIndex = match[0].indexOf("-")
+    const betaSeparatorIndex = match[0].indexOf("-")
     return betaSeparatorIndex > -1
       ? match[0].substring(0, betaSeparatorIndex)
       : match[0]
@@ -63,7 +63,7 @@ function getTarget (abi, runtime) {
 }
 
 function sortByTargetFn (a, b) {
-  var abiComp = Number(a.abi) - Number(b.abi)
+  const abiComp = Number(a.abi) - Number(b.abi)
   if (abiComp !== 0) return abiComp
   if (a.target < b.target) return -1
   if (a.target > b.target) return 1
@@ -71,23 +71,23 @@ function sortByTargetFn (a, b) {
 }
 
 function loadGeneratedTargets () {
-  var registry = require('./abi_registry.json')
-  var targets = {
+  const registry = require('./abi_registry.json')
+  const targets = {
     supported: [],
     additional: [],
     future: []
   }
 
   registry.forEach(function (item) {
-    var target = {
+    const target = {
       runtime: item.runtime,
       target: item.target,
       abi: item.abi
     }
     if (item.lts) {
-      var startDate = new Date(Date.parse(item.lts[0]))
-      var endDate = new Date(Date.parse(item.lts[1]))
-      var currentDate = new Date()
+      const startDate = new Date(Date.parse(item.lts[0]))
+      const endDate = new Date(Date.parse(item.lts[1]))
+      const currentDate = new Date()
       target.lts = startDate < currentDate && currentDate < endDate
     } else {
       target.lts = false
@@ -109,9 +109,9 @@ function loadGeneratedTargets () {
   return targets
 }
 
-var generatedTargets = loadGeneratedTargets()
+const generatedTargets = loadGeneratedTargets()
 
-var supportedTargets = [
+const supportedTargets = [
   {runtime: 'node', target: '5.0.0', abi: '47', lts: false},
   {runtime: 'node', target: '6.0.0', abi: '48', lts: false},
   {runtime: 'node', target: '7.0.0', abi: '51', lts: false},
@@ -134,7 +134,7 @@ var supportedTargets = [
 
 supportedTargets.push.apply(supportedTargets, generatedTargets.supported)
 
-var additionalTargets = [
+const additionalTargets = [
   {runtime: 'node-webkit', target: '0.13.0', abi: '47', lts: false},
   {runtime: 'node-webkit', target: '0.15.0', abi: '48', lts: false},
   {runtime: 'node-webkit', target: '0.18.3', abi: '51', lts: false},
@@ -144,7 +144,7 @@ var additionalTargets = [
 
 additionalTargets.push.apply(additionalTargets, generatedTargets.additional)
 
-var deprecatedTargets = [
+const deprecatedTargets = [
   {runtime: 'node', target: '0.2.0', abi: '1', lts: false},
   {runtime: 'node', target: '0.9.1', abi: '0x000A', lts: false},
   {runtime: 'node', target: '0.9.9', abi: '0x000B', lts: false},
@@ -162,9 +162,9 @@ var deprecatedTargets = [
   {runtime: 'electron', target: '0.33.0', abi: '46', lts: false}
 ]
 
-var futureTargets = generatedTargets.future
+const futureTargets = generatedTargets.future
 
-var allTargets = deprecatedTargets
+const allTargets = deprecatedTargets
   .concat(supportedTargets)
   .concat(additionalTargets)
   .concat(futureTargets)
