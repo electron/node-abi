@@ -1,4 +1,6 @@
 import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 import semver from 'semver';
 
@@ -62,7 +64,7 @@ function sortByTargetFn (a, b) {
 }
 
 function loadGeneratedTargets () {
-  const registry = JSON.parse(fs.readFileSync('./abi_registry.json', 'utf8'))
+  const registry = JSON.parse(fs.readFileSync(path.join(path.dirname(fileURLToPath(import.meta.url)), 'abi_registry.json'), 'utf8'))
   const targets = {
     supported: [],
     additional: [],
