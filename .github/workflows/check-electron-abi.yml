@@ -30,9 +30,9 @@ jobs:
       uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
       with:
         script: |
-          import nodeAbi from 'node-abi';
+          const { getAbi } = await import('${{ github.workspace }}/node_modules/node-abi/index.js');
 
-          const abi = nodeAbi.getAbi('${{ github.event.inputs.electron-version }}', 'electron');
+          const abi = getAbi('${{ github.event.inputs.electron-version }}', 'electron');
 
           if (abi !== '${{ github.event.inputs.expected-abi }}') {
             core.error(`Got ABI ${abi}, expected ${{ github.event.inputs.expected-abi }}`);
