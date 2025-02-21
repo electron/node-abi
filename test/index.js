@@ -1,7 +1,8 @@
 import assert from 'node:assert/strict'
 import { it } from 'node:test'
 
-import { getAbi, getTarget, _getNextTarget as getNextTarget } from '../index.js'
+import { getAbi, getTarget } from '../index.js'
+import { getNextTarget } from '../getNextTarget.js'
 
 it('getNextTarget gets the next unsupported target', () => {
   const mockTargets = [

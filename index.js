@@ -2,18 +2,7 @@ import fs from 'node:fs';
 
 import semver from 'semver';
 
-export function _getNextTarget (runtime, targets) {
-  if (targets == null) targets = allTargets
-  const latest = targets.filter(function (t) { return t.runtime === runtime }).slice(-1)[0]
-  const increment = runtime === 'electron' ? 'minor' : 'major'
-  let next = semver.inc(latest.target, increment)
-  // Electron releases appear in the registry in their beta form, sometimes there is
-  // no active beta line.  During this time we need to double bump
-  if (runtime === 'electron' && semver.parse(latest.target).prerelease.length) {
-    next = semver.inc(next, 'major')
-  }
-  return next
-}
+import { getNextTarget } from './getNextTarget.js';
 
 export function getAbi (target, runtime) {
   if (target === String(Number(target))) return target
@@ -37,7 +26,7 @@ export function getAbi (target, runtime) {
     }
   }
 
-  if (abi && semver.lt(target, _getNextTarget(runtime))) return abi
+  if (abi && semver.lt(target, getNextTarget(runtime, allTargets))) return abi
   throw new Error('Could not detect abi for version ' + target + ' and runtime ' + runtime + '.  Updating "node-abi" might help solve this issue if it is a new release of ' + runtime)
 }
 
