@@ -1,7 +1,8 @@
-const { writeFile } = require('node:fs/promises')
-const path = require('node:path')
+import { writeFile } from 'node:fs/promises'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url';
 
-const semver = require('semver')
+import semver from 'semver'
 
 function sortByElectronVersionFn (a, b) {
   const modulesComp = Number(a.modules) - Number(b.modules)
@@ -127,7 +128,7 @@ async function main () {
     ...electronTargets,
   ]
 
-  await writeFile(path.resolve(__dirname, '..', 'abi_registry.json'), JSON.stringify(supportedTargets, null, 2))
+  await writeFile(path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', 'abi_registry.json'), JSON.stringify(supportedTargets, null, 2))
 }
 
 main()
