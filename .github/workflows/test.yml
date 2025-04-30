@@ -4,6 +4,7 @@ on:
   pull_request:
     branches:
       - main
+      - 3-x-y
   schedule:
     - cron: '0 22 * * 3'
   workflow_call:

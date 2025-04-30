@@ -5,5 +5,12 @@
       "@continuous-auth/semantic-release-npm",
       "@semantic-release/github"
     ],
-    "branches": [ "main" ]
+    "branches": [
+      "main",
+      {
+        "name": "3-x-y",
+        "range": "3.x",
+        "channel": "3.x"
+      }
+    ]
   }
