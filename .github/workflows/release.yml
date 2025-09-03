@@ -37,6 +37,6 @@ jobs:
         with:
           package-name: node-abi
       - name: Run semantic release
-        run: semantic-release
+        run: yarn semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
