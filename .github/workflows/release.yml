@@ -32,7 +32,9 @@ jobs:
       - name: Install
         run: yarn install --frozen-lockfile
       - name: Fetch NPM Token
-        run: electron/npm-trusted-auth-action@418d14975a3ff06683cc4580a4eba437f0f017f1 # v1.0.0
+        uses: electron/npm-trusted-auth-action@418d14975a3ff06683cc4580a4eba437f0f017f1 # v1.0.0
+        with:
+          package-name: node-abi
       - name: Run semantic release
         run: semantic-release
         env:
