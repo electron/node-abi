@@ -17,6 +17,7 @@ jobs:
     environment: npm
     permissions:
       id-token: write # for publishing releases
+      contents: write # for making github release
     steps:
       - name: Checkout
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
@@ -30,5 +31,9 @@ jobs:
         run: npm install -g npm@^11.5.1
       - name: Install
         run: yarn install --frozen-lockfile
+      - name: Fetch NPM Token
+        run: electron/npm-trusted-auth-action@418d14975a3ff06683cc4580a4eba437f0f017f1 # v1.0.0
       - name: Run semantic release
         run: semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
