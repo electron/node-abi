@@ -116,7 +116,14 @@
       "2026-10-20"
     ],
     "future": false,
-    "abi": "134"
+    "abi": "137"
+  },
+  {
+    "runtime": "node",
+    "target": "25.0.0",
+    "lts": false,
+    "future": true,
+    "abi": "138"
   },
   {
     "abi": "70",
@@ -379,9 +386,16 @@
   },
   {
     "abi": "136",
-    "future": true,
+    "future": false,
     "lts": false,
     "runtime": "electron",
     "target": "37.0.0-alpha.1"
+  },
+  {
+    "abi": "139",
+    "future": false,
+    "lts": false,
+    "runtime": "electron",
+    "target": "38.0.0-alpha.1"
   }
 ]
