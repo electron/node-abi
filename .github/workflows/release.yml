@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - 3-x-y
 
 jobs:
   test:
@@ -15,7 +16,7 @@ jobs:
     needs: test
     environment: npm
     permissions:
-      id-token: write # for CFA and npm provenance
+      id-token: write # for publishing releases
     steps:
       - name: Checkout
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
@@ -25,12 +26,9 @@ jobs:
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version-file: '.nvmrc'
-          cache: 'yarn'
+      - name: Update npm to version that supports trusted publishing
+        run: npm install -g npm@^11.5.1
       - name: Install
         run: yarn install --frozen-lockfile
-      - uses: continuousauth/action@4e8a2573eeb706f6d7300d6a9f3ca6322740b72d # v1.0.5
-        timeout-minutes: 60
-        with:
-          project-id: ${{ secrets.CFA_PROJECT_ID }}
-          secret: ${{ secrets.CFA_SECRET }}
-          npm-token: ${{ secrets.NPM_TOKEN }}
+      - name: Run semantic release
+        run: semantic-release
