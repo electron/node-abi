@@ -397,5 +397,12 @@
     "lts": false,
     "runtime": "electron",
     "target": "38.0.0-alpha.1"
+  },
+  {
+    "abi": "140",
+    "future": true,
+    "lts": false,
+    "runtime": "electron",
+    "target": "39.0.0-alpha.1"
   }
 ]
