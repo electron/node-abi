@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/electron/node-abi#readme",
   "devDependencies": {
+    "semantic-release": "^24.2.7",
     "tape": "^5.3.1"
   },
   "dependencies": {
@@ -38,5 +39,6 @@
   },
   "publishConfig": {
     "provenance": true
-  }
+  },
+  "packageManager": "yarn@1.22.22"
 }
