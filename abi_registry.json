@@ -393,7 +393,7 @@
   },
   {
     "abi": "139",
-    "future": true,
+    "future": false,
     "lts": false,
     "runtime": "electron",
     "target": "38.0.0-alpha.1"
