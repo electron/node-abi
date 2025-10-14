@@ -36,7 +36,7 @@ jobs:
         key: ${{ runner.os }}-node-${{ hashFiles('**/package.json') }}
         restore-keys: |
           ${{ runner.os }}-node-
-    - run: yarn install --immutable --ignore-engines
+    - run: yarn install --immutable
     - name: Update ABI registry
       run: |
         npm run update-abi-registry
