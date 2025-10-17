@@ -33,7 +33,7 @@ jobs:
       - name: Update npm to version that supports trusted publishing
         run: npm install -g npm@^11.5.1
       - name: Install
-        run: yarn install --frozen-lockfile --ignore-engines
+        run: yarn install --immutable
       - name: Fetch NPM Token
         uses: electron/npm-trusted-auth-action@418d14975a3ff06683cc4580a4eba437f0f017f1 # v1.0.0
         with:
