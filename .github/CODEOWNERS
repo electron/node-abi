@@ -1,1 +1,5 @@
 * @electron/wg-ecosystem @electron/wg-releases @electron/wg-upgrades
+
+# There is no code owner for abi_registry.json
+# so that bots can approve automated PRs to it
+abi_registry.json

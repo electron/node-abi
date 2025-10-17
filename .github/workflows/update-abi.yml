@@ -5,6 +5,8 @@ on:
   schedule:
     - cron: '0 15-23,0-3 * * 1-5'
 
+permissions: {}
+
 jobs:
   autoupdate:
     strategy:
@@ -13,8 +15,9 @@ jobs:
           - main
           - 3-x-y
     runs-on: ubuntu-latest
+    environment: auto-updater
     steps:
-    - name: Generate GitHub App token
+    - name: Generate GitHub App token (updater app)
       uses: electron/github-app-auth-action@384fd19694fe7b6dcc9a684746c6976ad78228ae # v1.1.1
       id: generate-token
       with:
@@ -42,8 +45,35 @@ jobs:
         npm run update-abi-registry
         git add abi_registry.json
     - name: Commit Changes to ABI registry
+      id: commit-changes
       uses: dsanders11/github-app-commit-action@43de6da2f4d927e997c0784c7a0b61bd19ad6aac # v1.5.0
       with:
         fail-on-no-changes: false
         message: 'feat: update ABI registry'
+        ref: "feat/update-abi-registry-${{ matrix.branch }}-${{ hashFiles('abi_registry.json') }}"
         token: ${{ steps.generate-token.outputs.token }}
+    - name: Create pull request
+      if: ${{ steps.commit-changes.outputs.sha }}
+      shell: bash
+      env:
+        GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
+      run: |
+        gh pr create \
+          --title "feat: update ABI registry (${{ matrix.branch }})" \
+          --body "Automated PR to update abi_registry.json" \
+          --head "feat/update-abi-registry-${{ matrix.branch }}-${{ hashFiles('abi_registry.json') }}" \
+          --base ${{ matrix.branch }}
+    - name: Generate GitHub App token (approver app)
+      uses: electron/github-app-auth-action@384fd19694fe7b6dcc9a684746c6976ad78228ae # v1.1.1
+      if: ${{ steps.commit-changes.outputs.sha }}
+      id: generate-token-approver
+      with:
+        creds: ${{ secrets.APPROVER_GH_APP_CREDS }}
+    - name: Approve and merge pull request
+      if: ${{ steps.commit-changes.outputs.sha }}
+      shell: bash
+      env:
+        GITHUB_TOKEN: ${{ steps.generate-token-approver.outputs.token }}
+      run: |
+        gh pr review "feat/update-abi-registry-${{ matrix.branch }}-${{ hashFiles('abi_registry.json') }}" --approve
+        gh pr merge "feat/update-abi-registry-${{ matrix.branch }}-${{ hashFiles('abi_registry.json') }}" --auto --squash
