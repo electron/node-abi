@@ -20,8 +20,6 @@ jobs:
         node-version:
           - '20.10'
           - '18.18'
-          - '16.20'
-          - '14.21'
         os:
           - macos-latest
           - ubuntu-latest
