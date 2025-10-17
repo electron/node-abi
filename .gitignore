@@ -38,3 +38,6 @@ jspm_packages
 
 # lock files
 package-lock.json
+
+# Yarn internal state
+.yarn/install-state.gz
