@@ -122,7 +122,7 @@
     "runtime": "node",
     "target": "25.0.0",
     "lts": false,
-    "future": true,
+    "future": false,
     "abi": "141"
   },
   {
