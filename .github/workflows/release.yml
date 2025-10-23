@@ -29,15 +29,9 @@ jobs:
         uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
         with:
           node-version: '24.x'
-      - name: Update npm to version that supports trusted publishing
-        run: npm install -g npm@^11.5.1
       - name: Install
         run: yarn install --immutable
-      - name: Fetch NPM Token
-        uses: electron/npm-trusted-auth-action@418d14975a3ff06683cc4580a4eba437f0f017f1 # v1.0.0
-        with:
-          package-name: node-abi
       - name: Run semantic release
-        run: yarn semantic-release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: electron/semantic-trusted-release@61ce691b158cef415dd4e4e5b0bef65b29cb5d24 # v1.0.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
