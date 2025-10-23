@@ -30,10 +30,6 @@
     "url": "https://github.com/electron/node-abi/issues"
   },
   "homepage": "https://github.com/electron/node-abi#readme",
-  "devDependencies": {
-    "@semantic-release/npm": "13.0.0-alpha.15",
-    "semantic-release": "^24.2.7"
-  },
   "dependencies": {
     "semver": "^7.6.3"
   },
