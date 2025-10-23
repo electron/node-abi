@@ -32,6 +32,6 @@ jobs:
       - name: Install
         run: yarn install --immutable
       - name: Run semantic release
-        uses: electron/semantic-trusted-release@main # TODO - Pin to released version
+        uses: electron/semantic-trusted-release@61ce691b158cef415dd4e4e5b0bef65b29cb5d24 # v1.0.0
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
