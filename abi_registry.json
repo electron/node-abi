@@ -126,6 +126,16 @@
     "abi": "141"
   },
   {
+    "runtime": "node",
+    "target": "26.0.0",
+    "lts": [
+      "2026-10-28",
+      "2027-10-20"
+    ],
+    "future": true,
+    "abi": "142"
+  },
+  {
     "abi": "70",
     "future": false,
     "lts": false,
