@@ -30,7 +30,7 @@ jobs:
         run: yarn install --immutable
       - name: Get GitHub app token
         id: secret-service
-        uses: electron/secret-service@41b5bb0905f25df732f1808ea1a65719fbe1b15b
+        uses: electron/secret-service-action@3476425e8b30555aac15b1b7096938e254b0e155 # v1.0.0
       - name: Run semantic release
         uses: electron/semantic-trusted-release@5eceb399ac8de8863205cf6e34109bce473ba566 # v1.0.1
         with:
