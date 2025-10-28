@@ -34,4 +34,4 @@ jobs:
       - name: Run semantic release
         uses: electron/semantic-trusted-release@5eceb399ac8de8863205cf6e34109bce473ba566 # v1.0.1
         with:
-          github-token: ${{ fromJSON(steps.secret-service.secrets).GITHUB_TOKEN }}
+          github-token: ${{ fromJSON(steps.secret-service.outputs.secrets).GITHUB_TOKEN }}
