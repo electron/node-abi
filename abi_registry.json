@@ -122,8 +122,18 @@
     "runtime": "node",
     "target": "25.0.0",
     "lts": false,
-    "future": true,
+    "future": false,
     "abi": "141"
+  },
+  {
+    "runtime": "node",
+    "target": "26.0.0",
+    "lts": [
+      "2026-10-28",
+      "2027-10-20"
+    ],
+    "future": true,
+    "abi": "142"
   },
   {
     "abi": "70",
@@ -400,7 +410,7 @@
   },
   {
     "abi": "140",
-    "future": true,
+    "future": false,
     "lts": false,
     "runtime": "electron",
     "target": "39.0.0-alpha.1"
