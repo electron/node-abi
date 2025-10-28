@@ -10,6 +10,7 @@ permissions: {}
 jobs:
   autoupdate:
     strategy:
+      fail-fast: false
       matrix:
         branch:
           - main
