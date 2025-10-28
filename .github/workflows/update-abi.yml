@@ -68,5 +68,6 @@ jobs:
       run: |
         set -eo pipefail
         gh pr review "feat/update-abi-registry-${{ matrix.branch }}-${{ hashFiles('abi_registry.json') }}" --approve
+        sleep 30  # Checks don't always start immediately
         gh pr checks "feat/update-abi-registry-${{ matrix.branch }}-${{ hashFiles('abi_registry.json') }}" --watch --fail-fast
         gh pr merge "feat/update-abi-registry-${{ matrix.branch }}-${{ hashFiles('abi_registry.json') }}" --squash
