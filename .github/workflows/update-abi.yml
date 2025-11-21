@@ -64,7 +64,7 @@ jobs:
       if: ${{ steps.commit-changes.outputs.sha }}
       shell: bash
       env:
-        GITHUB_TOKEN: ${{ fromJSON(steps.secret-service.outputs.secrets || "{}").PR_APPROVER_GH_TOKEN }}
+        GITHUB_TOKEN: ${{ fromJSON(steps.secret-service.outputs.secrets || '{}').PR_APPROVER_GH_TOKEN }}
       run: |
         set -eo pipefail
         gh pr review "feat/update-abi-registry-${{ matrix.branch }}-${{ hashFiles('abi_registry.json') }}" --approve
