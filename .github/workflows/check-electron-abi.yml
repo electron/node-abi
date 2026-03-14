@@ -28,14 +28,17 @@ jobs:
       run: npm install --save-dev node-abi
     - name: Check ABI for Electron version
       uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
+      env:
+        ELECTRON_VERSION: ${{ github.event.inputs.electron-version }}
+        EXPECTED_ABI: ${{ github.event.inputs.expected-abi }}
       with:
         script: |
           const { getAbi } = await import('${{ github.workspace }}/node_modules/node-abi/index.js');
 
-          const abi = getAbi('${{ github.event.inputs.electron-version }}', 'electron');
+          const abi = getAbi(process.env.ELECTRON_VERSION, 'electron');
 
-          if (abi !== '${{ github.event.inputs.expected-abi }}') {
-            core.error(`Got ABI ${abi}, expected ${{ github.event.inputs.expected-abi }}`);
+          if (abi !== process.env.EXPECTED_ABI) {
+            core.error(`Got ABI ${abi}, expected ${process.env.EXPECTED_ABI}`);
             process.exitCode = 1;
           } else {
             core.info(`Got expected ABI ${abi}`);
