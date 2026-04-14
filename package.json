@@ -31,8 +31,8 @@
   },
   "scripts": {
     "test": "node --test test/index.js",
-    "lint": "oxlint && oxfmt --check .",
-    "lint:fix": "oxlint --fix && oxfmt --write .",
+    "lint": "oxfmt --check . && oxlint",
+    "lint:fix": "oxfmt --write . && oxlint --fix",
     "update-abi-registry": "node --unhandled-rejections=strict scripts/update-abi-registry.js",
     "prepare": "husky"
   },
@@ -47,11 +47,11 @@
   },
   "lint-staged": {
     "*.{js,mjs,cjs}": [
-      "oxfmt --check",
+      "oxfmt --write",
       "oxlint"
     ],
     "*.{json,css,html}": [
-      "oxfmt --check"
+      "oxfmt --write"
     ]
   },
   "engines": {
