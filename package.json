@@ -42,8 +42,8 @@
   "devDependencies": {
     "husky": "^9.1.7",
     "lint-staged": "^16.4.0",
-    "oxfmt": "^0",
-    "oxlint": "^0"
+    "oxfmt": "^0.45.0",
+    "oxlint": "^1.59.0"
   },
   "lint-staged": {
     "*.{js,mjs,cjs}": [
