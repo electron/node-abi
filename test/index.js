@@ -1,156 +1,168 @@
-import assert from 'node:assert/strict'
-import { it } from 'node:test'
+import assert from 'node:assert/strict';
+import { it } from 'node:test';
 
-import { getAbi, getTarget } from '../index.js'
-import { getNextTarget } from '../getNextTarget.js'
+import { getAbi, getTarget } from '../index.js';
+import { getNextTarget } from '../getNextTarget.js';
 
 it('getNextTarget gets the next unsupported target', () => {
   const mockTargets = [
-    {runtime: 'node', target: '7.0.0', abi: '51', lts: false},
-    {runtime: 'node', target: '8.0.0', abi: '57', lts: false},
-    {runtime: 'electron', target: '0.36.0', abi: '47', lts: false},
-    {runtime: 'electron', target: '1.1.0', abi: '48', lts: false}
-  ]
-  assert.strictEqual(getNextTarget('node', mockTargets), '9.0.0')
-  assert.strictEqual(getNextTarget('electron', mockTargets), '1.2.0')
-})
+    { runtime: 'node', target: '7.0.0', abi: '51', lts: false },
+    { runtime: 'node', target: '8.0.0', abi: '57', lts: false },
+    { runtime: 'electron', target: '0.36.0', abi: '47', lts: false },
+    { runtime: 'electron', target: '1.1.0', abi: '48', lts: false },
+  ];
+  assert.strictEqual(getNextTarget('node', mockTargets), '9.0.0');
+  assert.strictEqual(getNextTarget('electron', mockTargets), '1.2.0');
+});
 
 it('getTarget calculates correct Node target', () => {
-  assert.strictEqual(getTarget(undefined), process.versions.node)
-  assert.strictEqual(getTarget(null), process.versions.node)
-  assert.strictEqual(getTarget('11'), '0.10.4')
-  assert.strictEqual(getTarget('14'), '0.11.11')
-  assert.strictEqual(getTarget('46'), '4.0.0')
-  assert.strictEqual(getTarget('47'), '5.0.0')
-  assert.strictEqual(getTarget('48'), '6.0.0')
-  assert.strictEqual(getTarget('51'), '7.0.0')
-  assert.strictEqual(getTarget('67'), '11.0.0')
-  assert.strictEqual(getTarget('72'), '12.0.0')
-  assert.strictEqual(getTarget('83'), '14.0.0')
-  assert.strictEqual(getTarget('88'), '15.0.0')
-})
+  assert.strictEqual(getTarget(undefined), process.versions.node);
+  assert.strictEqual(getTarget(null), process.versions.node);
+  assert.strictEqual(getTarget('11'), '0.10.4');
+  assert.strictEqual(getTarget('14'), '0.11.11');
+  assert.strictEqual(getTarget('46'), '4.0.0');
+  assert.strictEqual(getTarget('47'), '5.0.0');
+  assert.strictEqual(getTarget('48'), '6.0.0');
+  assert.strictEqual(getTarget('51'), '7.0.0');
+  assert.strictEqual(getTarget('67'), '11.0.0');
+  assert.strictEqual(getTarget('72'), '12.0.0');
+  assert.strictEqual(getTarget('83'), '14.0.0');
+  assert.strictEqual(getTarget('88'), '15.0.0');
+});
 
 it('getTarget calculates correct Electron target', () => {
-  assert.throws(getTarget.bind(null, '14', 'electron'))
-  assert.strictEqual(getTarget('47', 'electron'), '0.36.0')
-  assert.strictEqual(getTarget('48', 'electron'), '1.1.0')
-  assert.strictEqual(getTarget('49', 'electron'), '1.3.0')
-  assert.strictEqual(getTarget('50', 'electron'), '1.4.0')
-  assert.strictEqual(getTarget('76', 'electron'), '8.0.0')
-  assert.strictEqual(getTarget('82', 'electron'), '10.0.0')
-  assert.strictEqual(getTarget('89', 'electron'), '13.0.0')
-})
+  assert.throws(getTarget.bind(null, '14', 'electron'));
+  assert.strictEqual(getTarget('47', 'electron'), '0.36.0');
+  assert.strictEqual(getTarget('48', 'electron'), '1.1.0');
+  assert.strictEqual(getTarget('49', 'electron'), '1.3.0');
+  assert.strictEqual(getTarget('50', 'electron'), '1.4.0');
+  assert.strictEqual(getTarget('76', 'electron'), '8.0.0');
+  assert.strictEqual(getTarget('82', 'electron'), '10.0.0');
+  assert.strictEqual(getTarget('89', 'electron'), '13.0.0');
+});
 
 it('getTarget calculates correct Node-Webkit target', () => {
-  assert.throws(getTarget.bind(null, '14', 'ode-webkit'))
-  assert.strictEqual(getTarget('47', 'node-webkit'), '0.13.0')
-  assert.strictEqual(getTarget('48', 'node-webkit'), '0.15.0')
-  assert.strictEqual(getTarget('51', 'node-webkit'), '0.18.3')
-  assert.strictEqual(getTarget('57', 'node-webkit'), '0.23.0')
-  assert.strictEqual(getTarget('59', 'node-webkit'), '0.26.5')
-})
+  assert.throws(getTarget.bind(null, '14', 'ode-webkit'));
+  assert.strictEqual(getTarget('47', 'node-webkit'), '0.13.0');
+  assert.strictEqual(getTarget('48', 'node-webkit'), '0.15.0');
+  assert.strictEqual(getTarget('51', 'node-webkit'), '0.18.3');
+  assert.strictEqual(getTarget('57', 'node-webkit'), '0.23.0');
+  assert.strictEqual(getTarget('59', 'node-webkit'), '0.26.5');
+});
 
 it('getAbi calculates correct Node ABI', () => {
-  assert.strictEqual(getAbi(undefined), process.versions.modules)
-  assert.strictEqual(getAbi(null), process.versions.modules)
-  assert.throws(function () { getAbi('a.b.c') })
-  assert.throws(function () { getAbi(getNextTarget('node')) })
-  assert.strictEqual(getAbi('15.0.0'), '88')
-  assert.strictEqual(getAbi('14.0.0'), '83')
-  assert.strictEqual(getAbi('13.0.0'), '79')
-  assert.strictEqual(getAbi('12.0.0'), '72')
-  assert.strictEqual(getAbi('11.0.0'), '67')
-  assert.strictEqual(getAbi('7.2.0'), '51')
-  assert.strictEqual(getAbi('7.0.0'), '51')
-  assert.strictEqual(getAbi('6.9.9'), '48')
-  assert.strictEqual(getAbi('6.0.0'), '48')
-  assert.strictEqual(getAbi('5.9.9'), '47')
-  assert.strictEqual(getAbi('5.0.0'), '47')
-  assert.strictEqual(getAbi('4.9.9'), '46')
-  assert.strictEqual(getAbi('4.0.0'), '46')
-  assert.strictEqual(getAbi('0.12.17'), '14')
-  assert.strictEqual(getAbi('0.12.0'), '14')
-  assert.strictEqual(getAbi('0.11.16'), '14')
-  assert.strictEqual(getAbi('0.11.11'), '14')
-  assert.strictEqual(getAbi('0.11.10'), '13')
-  assert.strictEqual(getAbi('0.11.8'), '13')
-  assert.strictEqual(getAbi('0.11.7'), '0x000C')
-  assert.strictEqual(getAbi('0.11.0'), '0x000C')
-  assert.strictEqual(getAbi('0.10.48'), '11')
-  assert.strictEqual(getAbi('0.10.30'), '11')
-  assert.strictEqual(getAbi('0.10.4'), '11')
-  assert.strictEqual(getAbi('0.10.3'), '0x000B')
-  assert.strictEqual(getAbi('0.10.1'), '0x000B')
-  assert.strictEqual(getAbi('0.10.0'), '0x000B')
-  assert.strictEqual(getAbi('0.9.12'), '0x000B')
-  assert.strictEqual(getAbi('0.9.9'), '0x000B')
-  assert.strictEqual(getAbi('0.9.8'), '0x000A')
-  assert.strictEqual(getAbi('0.9.1'), '0x000A')
-  assert.strictEqual(getAbi('0.9.0'), '1')
-  assert.strictEqual(getAbi('0.8.0'), '1')
-  assert.strictEqual(getAbi('0.2.0'), '1')
-})
+  assert.strictEqual(getAbi(undefined), process.versions.modules);
+  assert.strictEqual(getAbi(null), process.versions.modules);
+  assert.throws(function () {
+    getAbi('a.b.c');
+  });
+  assert.throws(function () {
+    getAbi(getNextTarget('node'));
+  });
+  assert.strictEqual(getAbi('15.0.0'), '88');
+  assert.strictEqual(getAbi('14.0.0'), '83');
+  assert.strictEqual(getAbi('13.0.0'), '79');
+  assert.strictEqual(getAbi('12.0.0'), '72');
+  assert.strictEqual(getAbi('11.0.0'), '67');
+  assert.strictEqual(getAbi('7.2.0'), '51');
+  assert.strictEqual(getAbi('7.0.0'), '51');
+  assert.strictEqual(getAbi('6.9.9'), '48');
+  assert.strictEqual(getAbi('6.0.0'), '48');
+  assert.strictEqual(getAbi('5.9.9'), '47');
+  assert.strictEqual(getAbi('5.0.0'), '47');
+  assert.strictEqual(getAbi('4.9.9'), '46');
+  assert.strictEqual(getAbi('4.0.0'), '46');
+  assert.strictEqual(getAbi('0.12.17'), '14');
+  assert.strictEqual(getAbi('0.12.0'), '14');
+  assert.strictEqual(getAbi('0.11.16'), '14');
+  assert.strictEqual(getAbi('0.11.11'), '14');
+  assert.strictEqual(getAbi('0.11.10'), '13');
+  assert.strictEqual(getAbi('0.11.8'), '13');
+  assert.strictEqual(getAbi('0.11.7'), '0x000C');
+  assert.strictEqual(getAbi('0.11.0'), '0x000C');
+  assert.strictEqual(getAbi('0.10.48'), '11');
+  assert.strictEqual(getAbi('0.10.30'), '11');
+  assert.strictEqual(getAbi('0.10.4'), '11');
+  assert.strictEqual(getAbi('0.10.3'), '0x000B');
+  assert.strictEqual(getAbi('0.10.1'), '0x000B');
+  assert.strictEqual(getAbi('0.10.0'), '0x000B');
+  assert.strictEqual(getAbi('0.9.12'), '0x000B');
+  assert.strictEqual(getAbi('0.9.9'), '0x000B');
+  assert.strictEqual(getAbi('0.9.8'), '0x000A');
+  assert.strictEqual(getAbi('0.9.1'), '0x000A');
+  assert.strictEqual(getAbi('0.9.0'), '1');
+  assert.strictEqual(getAbi('0.8.0'), '1');
+  assert.strictEqual(getAbi('0.2.0'), '1');
+});
 
-it('getAbi calculates correct Electron ABI', function (t) {
-  assert.throws(function () { getAbi(undefined, 'electron') })
-  assert.throws(function () { getAbi(getNextTarget('electron'), 'electron') })
-  assert.strictEqual(getAbi('15.0.0-beta.1', 'electron'), '89')
-  assert.strictEqual(getAbi('14.1.1', 'electron'), '97')
-  assert.strictEqual(getAbi('14.0.0', 'electron'), '89')
-  assert.strictEqual(getAbi('13.0.0', 'electron'), '89')
-  assert.strictEqual(getAbi('12.0.0', 'electron'), '87')
-  assert.strictEqual(getAbi('11.0.0', 'electron'), '85')
-  assert.strictEqual(getAbi('10.0.0', 'electron'), '82')
-  assert.strictEqual(getAbi('9.0.0', 'electron'), '80')
-  assert.strictEqual(getAbi('8.0.0', 'electron'), '76')
-  assert.strictEqual(getAbi('7.0.0', 'electron'), '75')
-  assert.strictEqual(getAbi('6.0.0', 'electron'), '73')
-  assert.strictEqual(getAbi('5.0.0', 'electron'), '70')
-  assert.strictEqual(getAbi('4.1.4', 'electron'), '69')
-  assert.strictEqual(getAbi('4.0.4', 'electron'), '69')
-  assert.strictEqual(getAbi('4.0.3', 'electron'), '64')
-  assert.strictEqual(getAbi('3.1.8', 'electron'), '64')
-  assert.strictEqual(getAbi('2.0.18', 'electron'), '57')
-  assert.strictEqual(getAbi('1.4.0', 'electron'), '50')
-  assert.strictEqual(getAbi('1.3.0', 'electron'), '49')
-  assert.strictEqual(getAbi('1.2.0', 'electron'), '48')
-  assert.strictEqual(getAbi('1.1.0', 'electron'), '48')
-  assert.strictEqual(getAbi('1.0.0', 'electron'), '47')
-  assert.strictEqual(getAbi('0.37.0', 'electron'), '47')
-  assert.strictEqual(getAbi('0.36.0', 'electron'), '47')
-  assert.strictEqual(getAbi('0.35.0', 'electron'), '46')
-  assert.strictEqual(getAbi('0.34.0', 'electron'), '46')
-  assert.strictEqual(getAbi('0.33.0', 'electron'), '46')
-  assert.strictEqual(getAbi('0.32.0', 'electron'), '45')
-  assert.strictEqual(getAbi('0.31.0', 'electron'), '45')
-  assert.strictEqual(getAbi('0.30.0', 'electron'), '44')
-})
+it('getAbi calculates correct Electron ABI', function (_t) {
+  assert.throws(function () {
+    getAbi(undefined, 'electron');
+  });
+  assert.throws(function () {
+    getAbi(getNextTarget('electron'), 'electron');
+  });
+  assert.strictEqual(getAbi('15.0.0-beta.1', 'electron'), '89');
+  assert.strictEqual(getAbi('14.1.1', 'electron'), '97');
+  assert.strictEqual(getAbi('14.0.0', 'electron'), '89');
+  assert.strictEqual(getAbi('13.0.0', 'electron'), '89');
+  assert.strictEqual(getAbi('12.0.0', 'electron'), '87');
+  assert.strictEqual(getAbi('11.0.0', 'electron'), '85');
+  assert.strictEqual(getAbi('10.0.0', 'electron'), '82');
+  assert.strictEqual(getAbi('9.0.0', 'electron'), '80');
+  assert.strictEqual(getAbi('8.0.0', 'electron'), '76');
+  assert.strictEqual(getAbi('7.0.0', 'electron'), '75');
+  assert.strictEqual(getAbi('6.0.0', 'electron'), '73');
+  assert.strictEqual(getAbi('5.0.0', 'electron'), '70');
+  assert.strictEqual(getAbi('4.1.4', 'electron'), '69');
+  assert.strictEqual(getAbi('4.0.4', 'electron'), '69');
+  assert.strictEqual(getAbi('4.0.3', 'electron'), '64');
+  assert.strictEqual(getAbi('3.1.8', 'electron'), '64');
+  assert.strictEqual(getAbi('2.0.18', 'electron'), '57');
+  assert.strictEqual(getAbi('1.4.0', 'electron'), '50');
+  assert.strictEqual(getAbi('1.3.0', 'electron'), '49');
+  assert.strictEqual(getAbi('1.2.0', 'electron'), '48');
+  assert.strictEqual(getAbi('1.1.0', 'electron'), '48');
+  assert.strictEqual(getAbi('1.0.0', 'electron'), '47');
+  assert.strictEqual(getAbi('0.37.0', 'electron'), '47');
+  assert.strictEqual(getAbi('0.36.0', 'electron'), '47');
+  assert.strictEqual(getAbi('0.35.0', 'electron'), '46');
+  assert.strictEqual(getAbi('0.34.0', 'electron'), '46');
+  assert.strictEqual(getAbi('0.33.0', 'electron'), '46');
+  assert.strictEqual(getAbi('0.32.0', 'electron'), '45');
+  assert.strictEqual(getAbi('0.31.0', 'electron'), '45');
+  assert.strictEqual(getAbi('0.30.0', 'electron'), '44');
+});
 
 it('getAbi calculates correct Node-Webkit ABI', () => {
-  assert.throws(function () { getAbi(undefined, 'node-webkit') })
-  assert.throws(function () { getAbi(getNextTarget('node-webkit'), 'node-webkit') })
-  assert.strictEqual(getAbi('0.13.0', 'node-webkit'), '47')
-  assert.strictEqual(getAbi('0.14.0', 'node-webkit'), '47')
-  assert.strictEqual(getAbi('0.15.0', 'node-webkit'), '48')
-  assert.strictEqual(getAbi('0.16.0', 'node-webkit'), '48')
-  assert.strictEqual(getAbi('0.17.0', 'node-webkit'), '48')
-  assert.strictEqual(getAbi('0.18.2', 'node-webkit'), '48')
-  assert.strictEqual(getAbi('0.18.3', 'node-webkit'), '51')
-  assert.strictEqual(getAbi('0.19.0', 'node-webkit'), '51')
-  assert.strictEqual(getAbi('0.20.0', 'node-webkit'), '51')
-  assert.strictEqual(getAbi('0.21.0', 'node-webkit'), '51')
-  assert.strictEqual(getAbi('0.22.0', 'node-webkit'), '51')
-  assert.strictEqual(getAbi('0.23.0', 'node-webkit'), '57')
-  assert.strictEqual(getAbi('0.24.0', 'node-webkit'), '57')
-  assert.strictEqual(getAbi('0.25.0', 'node-webkit'), '57')
-  assert.strictEqual(getAbi('0.26.4', 'node-webkit'), '57')
-  assert.strictEqual(getAbi('0.26.5', 'node-webkit'), '59')
-})
+  assert.throws(function () {
+    getAbi(undefined, 'node-webkit');
+  });
+  assert.throws(function () {
+    getAbi(getNextTarget('node-webkit'), 'node-webkit');
+  });
+  assert.strictEqual(getAbi('0.13.0', 'node-webkit'), '47');
+  assert.strictEqual(getAbi('0.14.0', 'node-webkit'), '47');
+  assert.strictEqual(getAbi('0.15.0', 'node-webkit'), '48');
+  assert.strictEqual(getAbi('0.16.0', 'node-webkit'), '48');
+  assert.strictEqual(getAbi('0.17.0', 'node-webkit'), '48');
+  assert.strictEqual(getAbi('0.18.2', 'node-webkit'), '48');
+  assert.strictEqual(getAbi('0.18.3', 'node-webkit'), '51');
+  assert.strictEqual(getAbi('0.19.0', 'node-webkit'), '51');
+  assert.strictEqual(getAbi('0.20.0', 'node-webkit'), '51');
+  assert.strictEqual(getAbi('0.21.0', 'node-webkit'), '51');
+  assert.strictEqual(getAbi('0.22.0', 'node-webkit'), '51');
+  assert.strictEqual(getAbi('0.23.0', 'node-webkit'), '57');
+  assert.strictEqual(getAbi('0.24.0', 'node-webkit'), '57');
+  assert.strictEqual(getAbi('0.25.0', 'node-webkit'), '57');
+  assert.strictEqual(getAbi('0.26.4', 'node-webkit'), '57');
+  assert.strictEqual(getAbi('0.26.5', 'node-webkit'), '59');
+});
 
 it('getAbi supports leading v', () => {
-  assert.strictEqual(getAbi('v7.2.0'), '51')
-})
+  assert.strictEqual(getAbi('v7.2.0'), '51');
+});
 
 it('getAbi returns abi if passed as target', () => {
-  assert.strictEqual(getAbi('57'), '57')
-})
+  assert.strictEqual(getAbi('57'), '57');
+});
