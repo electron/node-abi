@@ -1,0 +1,12 @@
+# faraday trust configuration for electron/node-abi.
+# A bot listed here is "trusted" and its paired `approvers` may stand in
+# for a human review on its PRs only.
+# See: https://github.com/electron/faraday
+
+trusted-bots:
+  # ABI table updates, verified and approved by electron-pr-approver.
+  - login: electron-node-abi-updater[bot]
+    id: 145538647
+    approvers:
+      - login: electron-pr-approver[bot]
+        id: 237345921
