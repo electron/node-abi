@@ -7,6 +7,8 @@ trusted-bots:
   # ABI table updates, verified and approved by electron-pr-approver.
   - login: electron-node-abi-updater[bot]
     id: 145538647
+    paths:
+      - abi_registry.json
     approvers:
       - login: electron-pr-approver[bot]
         id: 237345921
