@@ -136,6 +136,13 @@
     "abi": "147"
   },
   {
+    "runtime": "node",
+    "target": "27.0.0",
+    "lts": false,
+    "future": true,
+    "abi": "151"
+  },
+  {
     "abi": "70",
     "future": false,
     "lts": false,
