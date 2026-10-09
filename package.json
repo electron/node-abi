@@ -33,7 +33,7 @@
     "test": "node --test test/index.js",
     "lint": "oxfmt --check . && oxlint",
     "lint:fix": "oxfmt --write . && oxlint --fix",
-    "update-abi-registry": "node --unhandled-rejections=strict scripts/update-abi-registry.js",
+    "update-abi-registry": "node --unhandled-rejections=strict scripts/update-abi-registry.js && yarn lint:fix",
     "prepare": "husky"
   },
   "dependencies": {
