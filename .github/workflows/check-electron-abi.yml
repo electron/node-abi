@@ -26,7 +26,7 @@ jobs:
     - name: Create a Temporary package.json
       run: npm init --yes
     - name: Install latest node-abi
-      run: npm install --save-dev node-abi
+      run: npm install --save-dev node-abi # zizmor: ignore[adhoc-packages]
     - name: Check ABI for Electron version
       uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
       env:
